@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 
-export class SitewisePDosing extends Component {
-        constructor(props) {
+
+export class DepotDPMU extends Component {
+            constructor(props) {
           super(props);
           this.state = {
           
             series: [{
               name: "SCLF Yearly Trend",
-              data: [{
+              data: [
+                {
+                x: '2019',
+                y: '25'
+              }, 
+                {
                 x: '2020',
-                y: '5'
-              }, {
+                y: '16'
+              }, 
+              {
                 x: '2021',
-                y: '2'
+                y: '12'
               }, {
                 x: '2022',
-                y: '3'
+                y: '11'
               },
+              {
+                x: '2023',
+                y: '10k'
+              }
             ]
             }],
             options: {
@@ -38,9 +49,11 @@ export class SitewisePDosing extends Component {
                     fontWeight: 700
                   },
                   groups: [
-                    { title: '2020', cols: 1 },
-                    { title: '2021', cols: 1 },
-                    { title: '2022', cols: 1 },
+                    { title: 'Uttranchal', cols: 1 },
+                    { title: 'Chindwara', cols: 1 },
+                    { title: 'PondyHPC', cols: 1 },
+                    { title: 'Dapda', cols: 1 },
+                    { title: 'Sumerpur', cols: 1 }
                   ]
                 }
               },
@@ -63,12 +76,11 @@ export class SitewisePDosing extends Component {
     return (
       <>
         <div id="chart">
-            <Chart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            <Chart options={this.state.options} series={this.state.series} type="bar" height={380} />
         </div>
-        <p className='text-center'>% Dosing Accuracy</p>
       </>
     )
   }
 }
 
-export default SitewisePDosing
+export default DepotDPMU

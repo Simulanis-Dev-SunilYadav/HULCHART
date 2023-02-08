@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
 
-export class SitewisePDosing extends Component {
-        constructor(props) {
+
+export class DepotLocationInspected extends Component {
+            constructor(props) {
           super(props);
           this.state = {
           
@@ -18,6 +19,10 @@ export class SitewisePDosing extends Component {
                 x: '2022',
                 y: '3'
               },
+              {
+                x: '2023',
+                y: '4'
+              }
             ]
             }],
             options: {
@@ -41,6 +46,7 @@ export class SitewisePDosing extends Component {
                     { title: '2020', cols: 1 },
                     { title: '2021', cols: 1 },
                     { title: '2022', cols: 1 },
+                    { title: '2023', cols: 1 }
                   ]
                 }
               },
@@ -63,12 +69,11 @@ export class SitewisePDosing extends Component {
     return (
       <>
         <div id="chart">
-            <Chart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            <Chart options={this.state.options} series={this.state.series} type="bar" height={380} />
         </div>
-        <p className='text-center'>% Dosing Accuracy</p>
       </>
     )
   }
 }
 
-export default SitewisePDosing
+export default DepotLocationInspected
