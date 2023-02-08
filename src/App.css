@@ -1,8 +1,13 @@
 body{
   background: #fff;
 }
-.dashboard{
-  padding: 40px 0px;
+h3{
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+.dashboard {
+    padding: 40px 0px;
+    background: #f5f5f5;
 }
 .doughnt{
   height: 420px;
@@ -36,7 +41,7 @@ body{
 .activeinactive .notachieved{
     width: 11px;
     height: 11px;
-    background: #7a7a7a;
+    background: #9c2626;
     display: block;
     margin-top: 2px;
     margin-right: 4px;
@@ -44,7 +49,7 @@ body{
 
 
 .dashboard2, .dashboard3 {
-    padding: 25px 0px;
+    padding: 60px 0px;
 }
 
 #gauge-chart2 text {
@@ -56,4 +61,102 @@ body{
 }
 .gause #gauge-chart2{
   margin-top: 90px;
+}
+
+@media (min-width: 1100px){
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1280px !important;
+  }
+}
+
+.dashboard3 {
+    background: #f5f5f5;
+}
+
+.dashboard1{
+  padding: 60px 0px;
+}
+.dashboard1 .gause1{
+  height: 400px;
+}
+
+
+.yearly-progress{
+  height: 190px;
+  width: 250px;
+  /* background-color: lightblue; */
+  border: 2px solid grey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight:700;
+  color: #fff;
+
+}
+.up-progress,
+.down-progress{
+  width: 80%;
+  height: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.progress2020,.progress2021,.progress2022,.progress2023{
+  border: 2px solid black;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1px;
+  background-color: #2196f3 ;
+}
+
+
+.progress-table{
+  padding: 10px;
+  height: auto;
+  width: auto;
+  border: 2px solid grey;
+  border-radius: 10px;
+}
+
+table thead{
+  background-color: #18256d;
+  color: #fff;
+}
+
+table thead tr th{
+  width: auto;
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+
+table tbody tr td{
+  padding: 5px 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.progress-bar{
+  background: #027ee4;
+  color: #000 !important;
+}
+
+tbody{
+  border: 0.5px solid rgba(0, 0, 0, 0.61);
+}
+
+.progress-table p{
+  margin: 0;
+  font-weight: 600;
+  padding-bottom: 15px;
+  font-size: 18px;
 }

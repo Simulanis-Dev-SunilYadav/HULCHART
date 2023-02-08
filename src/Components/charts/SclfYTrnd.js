@@ -3,9 +3,8 @@ import Chart from 'react-apexcharts'
 
 
 export class SclfYTrnd extends Component {
-            constructor(props) {
+        constructor(props) {
           super(props);
-
           this.state = {
           
             series: [{
