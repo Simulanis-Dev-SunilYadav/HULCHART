@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GaugeChart from 'react-gauge-chart'
+import axios from "axios";
 
 
 export class NMBProductionCompilance extends Component {
@@ -12,102 +13,28 @@ export class NMBProductionCompilance extends Component {
 
   componentDidMount(){
     let current = this;
-    current.setState({
-      grafChart:{
-        "prodComplianceDataForAllFactoryResponseDataList": [
-          {
-            "proComplianceVal": "66.6338582677165354"
-          }
-        ],
-        "factories": [
-          {
-            "name": "Chhindwara",
-            "prodCompliancePercentage": "159.375000"
-          },
-          {
-            "name": "Dapada",
-            "prodCompliancePercentage": "67.626700"
-          },
-          {
-            "name": "Haridwar",
-            "prodCompliancePercentage": "42.345700"
-          },
-          {
-            "name": "Pondicherry",
-            "prodCompliancePercentage": "86.287600"
-          },
-          {
-            "name": "Sumerpur",
-            "prodCompliancePercentage": "110.989000"
-          }
-        ],
-        "sKUs": [
-          {
-            "skuName": "NIL MINERAL BAR 400G -BIS - Rs.62",
-            "prodComplianceVal": "127.777700"
-          },
-          {
-            "skuName": "SURF EXCEL BAR 250 GM",
-            "prodComplianceVal": "120.930200"
-          },
-          {
-            "skuName": "SURF EXCEL BAR 250G BIS",
-            "prodComplianceVal": "98.412600"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 100G",
-            "prodComplianceVal": "108.000000"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 100G - 140 CC",
-            "prodComplianceVal": "105.586500"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 150+50 GM",
-            "prodComplianceVal": "105.806400"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 150G",
-            "prodComplianceVal": "95.061700"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 400G",
-            "prodComplianceVal": "114.285700"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 80G",
-            "prodComplianceVal": "77.689200"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 84G 140 CC",
-            "prodComplianceVal": "25.527500"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 84G BIS",
-            "prodComplianceVal": "150.000000"
-          },
-          {
-            "skuName": "SURF EXCEL BAR FW 84G BIS 140 CC",
-            "prodComplianceVal": "125.806400"
-          },
-          {
-            "skuName": "SURF EXCEL BAR MPK 4x200G",
-            "prodComplianceVal": "165.420500"
-          },
-          {
-            "skuName": "SURF EXCEL BAR MPK 4x200G",
-            "prodComplianceVal": "197.297200"
-          },
-          {
-            "skuName": "SURF EXCEL BAR MPK 4x200G OFFER",
-            "prodComplianceVal": "25.225200"
-          }
-        ]
-      }
-    },function(){
-       var graphValue = current.state.grafChart.prodComplianceDataForAllFactoryResponseDataList[0].proComplianceVal;
-       var _percent = Number("."+graphValue.toString().replaceAll(".",''));
-       current.setState({percent:_percent})});
+
+        const passHeader = {
+          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIwYmJiNzRjNy02NTdlLTRlM2QtYTZiZC00ZTcxNTQwYWUyMDIiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vZjY2ZmFlMDItNWQzNi00OTViLWJmZTAtNzhhNmZmOWY4ZTZlL3YyLjAiLCJpYXQiOjE2NzU5NDA1NDcsIm5iZiI6MTY3NTk0MDU0NywiZXhwIjoxNjc1OTQ0NDQ3LCJhaW8iOiJBVlFBcS84VEFBQUFhNFAzRm9QZHpoNENMcGY0ZzVCN2E4emtxWEcwdVdPbE0zeld1VS9ORFhWS1pMMVpqOC9tdW5JM1h4TTBmaWlrTTZxbEdzeTJhOXdBYi9zMDc1WktTa2xFNDVPa3dKWXRIV0VtU1ZJamZ2WT0iLCJuYW1lIjoiaXQsIGRhcGFkYSIsIm5vbmNlIjoiOWU0NjYyYmMtYzNkMS00YzU0LTg5MzctODAwYzIzNjI1MTRkIiwib2lkIjoiNDk3YTNhODQtZDc0MS00ZjIyLTk5OTItMjgyYmRmOTVhNDg3IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGFwYWRhLml0QHVuaWxldmVyLmNvbSIsInJoIjoiMC5BUXdBQXE1djlqWmRXMG1fNEhpbV81LU9ic2QwdXd0LVpUMU9wcjFPY1ZRSzRnSU1BQncuIiwic3ViIjoiVXRwTjVhUERyR21CQjU1MW5xUG9EM2FYbldldVRIWDVIVmd1V242LWc4RSIsInRpZCI6ImY2NmZhZTAyLTVkMzYtNDk1Yi1iZmUwLTc4YTZmZjlmOGU2ZSIsInV0aSI6IjdwMmFGNlJKR2tlc2JfNmlmQmlVQUEiLCJ2ZXIiOiIyLjAifQ.E1Sok2oBioGm50fmeYVem_5EokdYL6xVMoWqNvSZJdrNMCdAUx765ajNRRsJW8u8C3j8o2sExz-5zLd6e-xDpQHISGcaIO3MxNIAIetGZPz_5ls2ajsYWr1lL3PQefASYhw8CtGHLMjyGEBLnsbFCjUJ6cH08TraHPNz5p7zNjvhHSHFPq82-wvLwI8tYMWCKS5e37gFSWoG4RNNoktvFi-5mZI0O9bE0nmEhuIrydDgMyHPWwZS9G6CNqM5mAheLy0LLjujZHoHiC63vKxnVoq7ADVMoxw7tVT0H7cfOvybGrbeYIdqQJ_m9nRqLSaN1JKU2tGrSnCE1CLyiTvtig",
+          Accept: "application/json",
+            "Content-Type": "application/json",
+              };
+      axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=yearly&startDate=2/8/2023&endDate=2/8/2023` , {
+            headers: passHeader,
+      }).then((response) =>{
+          current.setState({
+            grafChart:response.data
+            
+          },function(){
+            var graphValue = current.state.grafChart.prodComplianceDataForAllFactoryResponseDataList[0].proComplianceVal;
+            var _percent = Number("."+graphValue.toString().replaceAll(".",''));
+            current.setState({percent:_percent})});
+
+      }).catch((err)=>{
+                console.log("--err-");
+                console.log(err)
+              });
+
   }
 
   render() {
