@@ -6,6 +6,7 @@ import Dashboard2 from './Components/charts/Dashboard2';
 import Dashboard3 from './Components/charts/Dashboard3';
 import Dashboard4 from './Components/charts/Dashboard4';
 import Dashboard5 from './Components/charts/Dashboard5';
+import Dashboard11 from './Components/charts/Dashboard11';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/dashboard3" element={<Dashboard3/>} exact />
             <Route path="/dashboard4" element={<Dashboard4/>} exact />
             <Route path="/dashboard5" element={<Dashboard5/>} exact />
+            <Route path="/dashboard11" element={<Dashboard11/>} exact />
             {/* <Route path="/:formtype" component={FormController} exact /> */}
         </Routes>
     </Router>

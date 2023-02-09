@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Chart from "react-apexcharts";
+import axios from "axios";
 
 
 export class PdataComp extends Component {
@@ -38,19 +39,20 @@ export class PdataComp extends Component {
               },
               colors: [
                     '#006400', 
-                    '#8B0000', 
-                    '#8B0000', 
                     '#006400', 
+                    '#006400', 
+                    '#006400', 
+                    '#006400', 
+                    '#006400', 
+                    '#006400',
                     '#006400', 
                     '#006400', 
                     '#8B0000', 
                     '#006400',
+                    '#006400',
                     '#006400', 
                     '#006400',
                     '#8B0000', 
-                    '#006400',
-                    '#006400', 
-                    '#006400'
                   ],
               dataLabels: {
                 enabled: false,
@@ -135,99 +137,19 @@ export class PdataComp extends Component {
           let current = this;
           var product_name=[];
           var product_value=[];
-          current.setState({
-            grafChart:{
-              "prodComplianceDataForAllFactoryResponseDataList": [
-                {
-                  "proComplianceVal": "66.6338582677165354"
-                }
-              ],
-              "factories": [
-                {
-                  "name": "Chhindwara",
-                  "prodCompliancePercentage": "159.375000"
-                },
-                {
-                  "name": "Dapada",
-                  "prodCompliancePercentage": "67.626700"
-                },
-                {
-                  "name": "Haridwar",
-                  "prodCompliancePercentage": "42.345700"
-                },
-                {
-                  "name": "Pondicherry",
-                  "prodCompliancePercentage": "86.287600"
-                },
-                {
-                  "name": "Sumerpur",
-                  "prodCompliancePercentage": "110.989000"
-                }
-              ],
-              "sKUs": [
-                {
-                  "skuName": "NIL MINERAL BAR 400G -BIS - Rs.62",
-                  "prodComplianceVal": "127.777700"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR 250 GM",
-                  "prodComplianceVal": "120.930200"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR 250G BIS",
-                  "prodComplianceVal": "98.412600"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 100G",
-                  "prodComplianceVal": "108.000000"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 100G - 140 CC",
-                  "prodComplianceVal": "105.586500"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 150+50 GM",
-                  "prodComplianceVal": "105.806400"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 150G",
-                  "prodComplianceVal": "95.061700"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 400G",
-                  "prodComplianceVal": "114.285700"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 80G",
-                  "prodComplianceVal": "77.689200"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 84G 140 CC",
-                  "prodComplianceVal": "25.527500"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 84G BIS",
-                  "prodComplianceVal": "150.000000"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR FW 84G BIS 140 CC",
-                  "prodComplianceVal": "125.806400"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR MPK 4x200G",
-                  "prodComplianceVal": "165.420500"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR MPK 4x200G",
-                  "prodComplianceVal": "197.297200"
-                },
-                {
-                  "skuName": "SURF EXCEL BAR MPK 4x200G OFFER",
-                  "prodComplianceVal": "25.225200"
-                }
-              ]
-            }
-          },function(){
+
+          const passHeader = {
+            Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIwYmJiNzRjNy02NTdlLTRlM2QtYTZiZC00ZTcxNTQwYWUyMDIiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vZjY2ZmFlMDItNWQzNi00OTViLWJmZTAtNzhhNmZmOWY4ZTZlL3YyLjAiLCJpYXQiOjE2NzU5NDU1MzgsIm5iZiI6MTY3NTk0NTUzOCwiZXhwIjoxNjc1OTQ5NDM4LCJhaW8iOiJBVlFBcS84VEFBQUFscVd1NjNxS2Vtc3NnS0RVdUNWTDVuK21kN0dFUkowOHBkd3VTSkNxaS9jTmlsUmxEOEVKQUlnVWs3Y2MxZVh5YWpSTXk0bXViTmJWKzAxT3VCQUp0eXdWaFlZK3hIZ2lrWDNQUDVMeTlEYz0iLCJuYW1lIjoiaXQsIGRhcGFkYSIsIm5vbmNlIjoiMTU1ZjZkOTItNzI3Mi00Njc2LWJmMTMtYjNkYjJiOGVhZmFlIiwib2lkIjoiNDk3YTNhODQtZDc0MS00ZjIyLTk5OTItMjgyYmRmOTVhNDg3IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGFwYWRhLml0QHVuaWxldmVyLmNvbSIsInJoIjoiMC5BUXdBQXE1djlqWmRXMG1fNEhpbV81LU9ic2QwdXd0LVpUMU9wcjFPY1ZRSzRnSU1BQncuIiwic3ViIjoiVXRwTjVhUERyR21CQjU1MW5xUG9EM2FYbldldVRIWDVIVmd1V242LWc4RSIsInRpZCI6ImY2NmZhZTAyLTVkMzYtNDk1Yi1iZmUwLTc4YTZmZjlmOGU2ZSIsInV0aSI6Inlyb1duNFloUmt5cDN3LUtNeTlOQUEiLCJ2ZXIiOiIyLjAifQ.lqC4o2iMcNMDPG7RvFtGkSOW80ndxREuuAg5vTT5k3-hmXbofsBwCAbSMPyD7OoVno4n584gUg6hJvDSebZKheuPA5SMn1_li3C_6DysPuzO8FPh833s9y7gEYJPYV0MKOuXtKjVsxaPpbWvXpJU-yYoZx-8tGtMaYIbTgCeAUSt_d8hJa1RtMbRHEJ4XNPwOf1R4CKwksruImI6xiXgM1yfyDBAW3xUjz1h83Oj69g3gc1TjAY9NzyJN64km__et36WFQVecDrhWYwjgAmCdEZUJ0jC_gha2yD4OCZ7v_C7XJL5BuL4DE1w4PkegXloCBKPaW9C10A4b9VW26YcOg",
+            Accept: "application/json",
+              "Content-Type": "application/json",
+                };
+          axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=yearly&startDate=2/8/2023&endDate=2/8/2023` , {
+                headers: passHeader,
+          }).then((response) =>{
+            current.setState({
+              grafChart:response.data
+              
+            },function(){
             current.state.grafChart.sKUs.map(e=>{
                 product_name.push(e.skuName);
                 product_value.push(Number(e.prodComplianceVal));
@@ -242,13 +164,12 @@ export class PdataComp extends Component {
                 }
               }
               });
-            // current.setState({
-            //     productName: product_name,
-            //     productValue: product_value
-            //   },()=>{
-
-            //   })
             });
+
+          }).catch((err)=>{
+            console.log("--err-");
+            console.log(err)
+          });
         }
 
   render() {

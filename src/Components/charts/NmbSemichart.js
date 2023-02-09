@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import GaugeChart from 'react-gauge-chart'
-
+import axios from "axios";
 
 export class NmbSemichart extends Component {
   constructor(props) {
@@ -13,113 +13,28 @@ export class NmbSemichart extends Component {
 
   componentDidMount() {
   let current = this;
-      current.setState({
-        data: {
-          "lastUpdate": "2023-02-09T09:18:22.51",
-          "overallNMBValue": 97.83,
-          "rmDosingAccuracyData": {
-            "overallCount": {
-              "totalSite": 3,
-              "totalBatch": 85,
-              "totalCascade": 10,
-              "totalUniqueRM": 10
-            },
-            "siteWiseDosingAccuracy": [
-              {
-                "factoryID": 1,
-                "factoryName": "Dapada",
-                "averageValue": 103.49
-              },
-              {
-                "factoryID": 2,
-                "factoryName": "Pondicherry",
-                "averageValue": 98.6
-              },
-              {
-                "factoryID": 3,
-                "factoryName": "Chhindwara",
-                "averageValue": 91.39
-              }
-            ],
-            "rmWiseDosingAccuracy": [
-              {
-                "rmDosingName": "LABSA",
-                "averageValue": 99.38
-              },
-              {
-                "rmDosingName": "SODAL",
-                "averageValue": 96.83
-              },
-              {
-                "rmDosingName": "FRISIS",
-                "averageValue": 99.69
-              },
-              {
-                "rmDosingName": "SILICATE",
-                "averageValue": 96.92
-              },
-              {
-                "rmDosingName": "PERFUME",
-                "averageValue": 98.89
-              },
-              {
-                "rmDosingName": "PHOSPHORIC",
-                "averageValue": 99.47
-              },
-              {
-                "rmDosingName": "FELDSPAR",
-                "averageValue": 97.02
-              },
-              {
-                "rmDosingName": "STPP",
-                "averageValue": 91.84
-              },
-              {
-                "rmDosingName": "HA20",
-                "averageValue": 99.39
-              },
-              {
-                "rmDosingName": "COLOR",
-                "averageValue": 99.78
-              }
-            ]
-          }
-        }
+  const passHeader = {
+    Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIwYmJiNzRjNy02NTdlLTRlM2QtYTZiZC00ZTcxNTQwYWUyMDIiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vZjY2ZmFlMDItNWQzNi00OTViLWJmZTAtNzhhNmZmOWY4ZTZlL3YyLjAiLCJpYXQiOjE2NzU5NDU1MzgsIm5iZiI6MTY3NTk0NTUzOCwiZXhwIjoxNjc1OTQ5NDM4LCJhaW8iOiJBVlFBcS84VEFBQUFscVd1NjNxS2Vtc3NnS0RVdUNWTDVuK21kN0dFUkowOHBkd3VTSkNxaS9jTmlsUmxEOEVKQUlnVWs3Y2MxZVh5YWpSTXk0bXViTmJWKzAxT3VCQUp0eXdWaFlZK3hIZ2lrWDNQUDVMeTlEYz0iLCJuYW1lIjoiaXQsIGRhcGFkYSIsIm5vbmNlIjoiMTU1ZjZkOTItNzI3Mi00Njc2LWJmMTMtYjNkYjJiOGVhZmFlIiwib2lkIjoiNDk3YTNhODQtZDc0MS00ZjIyLTk5OTItMjgyYmRmOTVhNDg3IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGFwYWRhLml0QHVuaWxldmVyLmNvbSIsInJoIjoiMC5BUXdBQXE1djlqWmRXMG1fNEhpbV81LU9ic2QwdXd0LVpUMU9wcjFPY1ZRSzRnSU1BQncuIiwic3ViIjoiVXRwTjVhUERyR21CQjU1MW5xUG9EM2FYbldldVRIWDVIVmd1V242LWc4RSIsInRpZCI6ImY2NmZhZTAyLTVkMzYtNDk1Yi1iZmUwLTc4YTZmZjlmOGU2ZSIsInV0aSI6Inlyb1duNFloUmt5cDN3LUtNeTlOQUEiLCJ2ZXIiOiIyLjAifQ.lqC4o2iMcNMDPG7RvFtGkSOW80ndxREuuAg5vTT5k3-hmXbofsBwCAbSMPyD7OoVno4n584gUg6hJvDSebZKheuPA5SMn1_li3C_6DysPuzO8FPh833s9y7gEYJPYV0MKOuXtKjVsxaPpbWvXpJU-yYoZx-8tGtMaYIbTgCeAUSt_d8hJa1RtMbRHEJ4XNPwOf1R4CKwksruImI6xiXgM1yfyDBAW3xUjz1h83Oj69g3gc1TjAY9NzyJN64km__et36WFQVecDrhWYwjgAmCdEZUJ0jC_gha2yD4OCZ7v_C7XJL5BuL4DE1w4PkegXloCBKPaW9C10A4b9VW26YcOg",
+    Accept: "application/json",
+      "Content-Type": "application/json",
+        };
+    axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetRMDosingAccuracy?startDate=2/8/2023&endDate=2/8/2023&duration=daily` , {
+          headers: passHeader,
+    }).then((response) =>{
+        current.setState({
+          data:response.data
+        }, function () {
+          var _percent = Number('.'+current.state.data.overallNMBValue.toString().replaceAll(".",''));
+          current.setState({percent:_percent})
+        });
 
-      }, function () {
-        var _percent = Number('.'+current.state.data.overallNMBValue.toString().replaceAll(".",''));
-        console.log("_percent")
-        console.log(_percent)
-        current.setState({percent:_percent})
-
+      }).catch((err)=>{
+        console.log("--err-");
+        console.log(err)
       });
 
+
   }
-  //   const passHeader = { Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIwYmJiNzRjNy02NTdlLTRlM2QtYTZiZC00ZTcxNTQwYWUyMDIiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vZjY2ZmFlMDItNWQzNi00OTViLWJmZTAtNzhhNmZmOWY4ZTZlL3YyLjAiLCJpYXQiOjE2NzU4NTEzNDYsIm5iZiI6MTY3NTg1MTM0NiwiZXhwIjoxNjc1ODU1MjQ2LCJhaW8iOiJBVFFBeS84VEFBQUE2UG5sZW1aTW5KVmxSR2x0RlNZRk9GZlVoVlo3NTgyVXNGTzJsS0NQRzhCcDNqR21hK2NNVUF3VTJ6eC96ZWp4IiwibmFtZSI6Iml0LCBkYXBhZGEiLCJub25jZSI6ImYzZGNiMWM2LTBmNTQtNGJmMi1hMDAyLTM5NjAwMjFlN2E2ZiIsIm9pZCI6IjQ5N2EzYTg0LWQ3NDEtNGYyMi05OTkyLTI4MmJkZjk1YTQ4NyIsInByZWZlcnJlZF91c2VybmFtZSI6ImRhcGFkYS5pdEB1bmlsZXZlci5jb20iLCJyaCI6IjAuQVF3QUFxNXY5alpkVzBtXzRIaW1fNS1PYnNkMHV3dC1aVDFPcHIxT2NWUUs0Z0lNQUJ3LiIsInN1YiI6IlV0cE41YVBEckdtQkI1NTFucVBvRDNhWG5XZXVUSFg1SFZndVduNi1nOEUiLCJ0aWQiOiJmNjZmYWUwMi01ZDM2LTQ5NWItYmZlMC03OGE2ZmY5ZjhlNmUiLCJ1dGkiOiIyVC1xWmU1MFRVaUl5NUdZNWRsN0FBIiwidmVyIjoiMi4wIn0.NvnuaDVecGtqjv9O-ijyf-PJ_T-svnjY1vKNfLi3UUkX1wsrSXNx5Vjo3ST31o2sHAdze88zHK3QIbVOCnLuZiupR3Iz-Lqh1k5e7BjbhhwaouUKJWc8aUAPL7g3ZIUnCWYufdcRGHafqvCAnS6_IpVLBczbIiMXlOTjtw_bGBDCsSDk8DupzvN-PFIeO8xdlwYj9FmFpXp6WU8hLcCIhjFdrx9NVOdURAIEsERzhxBJq05rXqi-TIG0je_9yqNiW0sdO6J5GIztAs36tUNdcAyaeIby7dhRhuVosWg6dGMehpgeiZH7SdDXKL_YUXkxudJJXbGFhkxnwKj1v-X3fw' ,
-    // };
-    
-    //   axios.get(`GetRMDosingAccuracy?startDate=2/7/2023&endDate=2/7/2023&duration=daily` , {
-    //     headers: passHeader,
-    //   }).then((response) =>{
-    //         console.log("--response-");
-    //         console.log(response)
-    //   }).catch((err)=>{
-    //     console.log("--err-");
-    //     console.log(err)
-      // });
-
-    
-
-
-         
-        // var Chhindwara = data.factories.find(item => item.name == "Chhindwara");
-        // var Dapada = data.factories.find(item => item.name == "Dapada");
-        // var Haridwar = data.factories.find(item => item.name == "Haridwar");
-        // var Pondicherry = data.factories.find(item => item.name == "Pondicherry");
-        // var Sumerpur = data.factories.find(item => item.name == "Sumerpur");
-
-
-
 
   render() {
     return (
