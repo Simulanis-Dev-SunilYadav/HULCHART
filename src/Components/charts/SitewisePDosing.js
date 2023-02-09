@@ -5,17 +5,17 @@ export class SitewisePDosing extends Component {
         constructor(props) {
           super(props);
           this.state = {
-          
+            data:null,
             series: [{
               name: "SCLF Yearly Trend",
               data: [{
-                x: '2020',
+                x: 'Chhindwara',
                 y: '5'
               }, {
-                x: '2021',
+                x: 'Dapada',
                 y: '2'
               }, {
-                x: '2022',
+                x: 'Pondicherry',
                 y: '3'
               },
             ]
@@ -38,9 +38,9 @@ export class SitewisePDosing extends Component {
                     fontWeight: 700
                   },
                   groups: [
-                    { title: '2020', cols: 1 },
-                    { title: '2021', cols: 1 },
-                    { title: '2022', cols: 1 },
+                    { title: 'Chhindwara', cols: 1 },
+                    { title: 'Dapada', cols: 1 },
+                    { title: 'Pondicherry', cols: 1 },
                   ]
                 }
               },
@@ -59,6 +59,119 @@ export class SitewisePDosing extends Component {
           
           };
         }
+
+
+        componentDidMount() {
+          let current = this;
+              current.setState({
+                data: {
+                  "lastUpdate": "2023-02-09T09:18:22.51",
+                  "overallNMBValue": 97.83,
+                  "rmDosingAccuracyData": {
+                    "overallCount": {
+                      "totalSite": 3,
+                      "totalBatch": 85,
+                      "totalCascade": 10,
+                      "totalUniqueRM": 10
+                    },
+                    "siteWiseDosingAccuracy": [
+                      {
+                        "factoryID": 1,
+                        "factoryName": "Dapada",
+                        "averageValue": 103.49
+                      },
+                      {
+                        "factoryID": 2,
+                        "factoryName": "Pondicherry",
+                        "averageValue": 98.6
+                      },
+                      {
+                        "factoryID": 3,
+                        "factoryName": "Chhindwara",
+                        "averageValue": 91.39
+                      }
+                    ],
+                    "rmWiseDosingAccuracy": [
+                      {
+                        "rmDosingName": "LABSA",
+                        "averageValue": 99.38
+                      },
+                      {
+                        "rmDosingName": "SODAL",
+                        "averageValue": 96.83
+                      },
+                      {
+                        "rmDosingName": "FRISIS",
+                        "averageValue": 99.69
+                      },
+                      {
+                        "rmDosingName": "SILICATE",
+                        "averageValue": 96.92
+                      },
+                      {
+                        "rmDosingName": "PERFUME",
+                        "averageValue": 98.89
+                      },
+                      {
+                        "rmDosingName": "PHOSPHORIC",
+                        "averageValue": 99.47
+                      },
+                      {
+                        "rmDosingName": "FELDSPAR",
+                        "averageValue": 97.02
+                      },
+                      {
+                        "rmDosingName": "STPP",
+                        "averageValue": 91.84
+                      },
+                      {
+                        "rmDosingName": "HA20",
+                        "averageValue": 99.39
+                      },
+                      {
+                        "rmDosingName": "COLOR",
+                        "averageValue": 99.78
+                      }
+                    ]
+                  }
+                }
+              }, function () {
+
+                  //  var ChhindwaraData = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy;
+                var ChhindwaraData = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Chhindwara");;
+                var Dapada =  current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Dapada");
+                var Pondicherry = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Pondicherry");
+
+                console.log("ChhindwaraData")
+                console.log(ChhindwaraData.averageValue)
+                console.log("Dapada")
+                console.log(Dapada.averageValue)
+                console.log("Pondicherry")
+                console.log(Pondicherry.averageValue)
+
+               current.setState({
+                series: [{
+                  name: "SCLF Yearly Trend",
+                  data: [{
+                    x: 'Chhindwara',
+                    y: ChhindwaraData.averageValue
+                  }, {
+                    x: 'Dapada',
+                    y: Dapada.averageValue
+                  }, {
+                    x: 'Pondicherry',
+                    y: Pondicherry.averageValue
+                  },
+                ]
+                }]
+               })
+        
+              });
+        
+          }
+
+
+        
   render() {
     return (
       <>
