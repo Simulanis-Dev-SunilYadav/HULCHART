@@ -37,7 +37,7 @@ class LineDotted extends React.Component {
             fontSize: '20px'
           },
           stroke: {
-            width: [8],
+            width: [3],
             curve: 'straight',
             dashArray: [8]
           },
@@ -101,16 +101,11 @@ class LineDotted extends React.Component {
 
     render() {
       return (
-        
-
-  <div id="chart">
-<ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} width="100%" />
-</div>
-
-
-
-);
-}
-}
+        <div id="chart">
+          <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={200} width="100%" />
+        </div>
+      );
+      }
+    }
 
   export default LineDotted;

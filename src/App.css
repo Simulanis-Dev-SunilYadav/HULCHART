@@ -2,8 +2,8 @@ body{
   background: #fff;
 }
 h3{
-  font-size: 18px !important;
-  font-weight: 700 !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
 }
 .dashboard {
     padding: 40px 0px;
@@ -49,7 +49,7 @@ h3{
 
 
 .dashboard2, .dashboard3 {
-    padding: 60px 0px;
+    padding: 40px 0px;
 }
 
 #gauge-chart2 text {
@@ -74,7 +74,7 @@ h3{
 }
 
 .dashboard1{
-  padding: 60px 0px;
+  padding: 40px 0px;
 }
 .dashboard1 .gause1{
   height: 400px;
@@ -82,16 +82,12 @@ h3{
 
 
 .yearly-progress{
-  height: 190px;
-  width: 250px;
-  /* background-color: lightblue; */
-  border: 2px solid grey;
-  border-radius: 10px;
+  height: 248px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  font-size: 21px;
   font-weight:700;
   color: #fff;
 
@@ -107,7 +103,7 @@ h3{
 
 .progress2020,.progress2021,.progress2022,.progress2023{
   border: 2px solid black;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,10 +114,8 @@ h3{
 
 
 .progress-table{
-  padding: 10px;
   height: auto;
   width: auto;
-  border: 2px solid grey;
   border-radius: 10px;
 }
 
@@ -131,14 +125,17 @@ table thead{
 }
 
 table thead tr th{
-  width: auto;
-  padding: 10px 10px;
-  font-size: 15px;
+    width: auto;
+    padding: 10px 6px;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 
 table tbody tr td{
-  padding: 5px 5px;
+    padding: 5px 4px !important;
+    font-size: 11px;
+    font-weight: 500;
 }
 
 tr:nth-child(even) {
@@ -159,4 +156,22 @@ tbody{
   font-weight: 600;
   padding-bottom: 15px;
   font-size: 18px;
+}
+
+.dashboard0 {
+    padding: 40px 0px;
+}
+
+.progress {
+    height: 14px;
+    font-size: 9px;
+}
+
+.apexcharts-xaxistooltip, .apexcharts-yaxistooltip{
+  display: none;
+}
+
+.card {
+    border: 1px solid #f3f3f3;
+    box-shadow: 0px 0px 10px #0000001c;
 }

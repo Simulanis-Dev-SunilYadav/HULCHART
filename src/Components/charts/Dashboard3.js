@@ -22,7 +22,7 @@ function dashboard3() {
                     </div>
                 </div>
 
-                <div className="row mt-5">
+                <div className="row mt-4">
                     <div className="col-md-4">
                         <div className="card">
                             <div className='card-body doughnt'>

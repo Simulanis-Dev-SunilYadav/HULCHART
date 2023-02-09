@@ -10,7 +10,11 @@ export class TargetVActual extends Component {
               data: [400, 430, 448, 470, 540]
             }],
             options: {
+              colors: ['#2e2e2e'],
               chart: {
+                toolbar: {
+                    show: false,
+                },
                 type: 'bar',
                 height: 350
               },
@@ -36,7 +40,7 @@ export class TargetVActual extends Component {
     return (
       <>
         <div id="chart">
-            <Chart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            <Chart options={this.state.options} series={this.state.series} type="bar" height={380} />
         </div>
       </>
     )

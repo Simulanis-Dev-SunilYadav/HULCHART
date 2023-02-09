@@ -40,6 +40,9 @@ export class ColumnOEE extends Component {
         ],
         options: {
             chart: {
+            toolbar: {
+                show: false,
+            },
             height: 350,
             type: 'bar',
             events: {

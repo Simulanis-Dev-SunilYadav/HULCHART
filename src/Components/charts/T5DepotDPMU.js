@@ -18,6 +18,9 @@ export class T5DepotDPMU extends Component {
                 breakpoint: 480,
                 options: {
                   chart: {
+                    toolbar: {
+                        show: false,
+                    },
                     width: 200
                   },
                   legend: {
@@ -34,7 +37,7 @@ export class T5DepotDPMU extends Component {
     return (
       <>
         <div id="chart">
-            <Chart options={this.state.options} series={this.state.series} type="pie" width="100%" height="350px" />
+            <Chart options={this.state.options} series={this.state.series} type="pie" width="100%" height="380px" />
         </div>
       </>
     )
