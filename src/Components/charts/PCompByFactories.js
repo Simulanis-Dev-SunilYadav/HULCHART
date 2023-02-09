@@ -8,33 +8,33 @@ export class PCompByFactories extends Component {
         this.state = {
           series: [
               {
-              name: 'PRODUCT A',
+              name: '',
               data: [
-                      {
-                  x: '',
-                  y: 120,
-                  fillColor: '#006400'
-                  },
-                      {
+                    {
+                      x: '',
+                      y: 120,
+                      fillColor: '#006400'
+                    },
+                    {
                       x: '',
                       y: 80,
                       fillColor: '#8B0000'
-                  },
-                      {
+                    },
+                    {
                       x: '',
                       y: 60,
                       fillColor: '#8B0000'
-                  },
-                  {
+                    },
+                    {
                       x: '',
                       y: 70,
                       fillColor: '#8B0000'
-                  },
-                      {
+                    },
+                    {
                       x: '',
                       y: 100,
                       fillColor: '#006400'
-                  },
+                    },
                ]
              },
           ],
@@ -43,15 +43,11 @@ export class PCompByFactories extends Component {
                 toolbar: {
                     show: false
                     },
-            //   height: 600,
-            //   type: 'bar',
               events: {
                 click: function(chart, w, e) {
-                  // console.log(chart, w, e)
                 }
               }
             },
-          //   colors: colors,
             plotOptions: {
               bar: {
                 columnWidth: '45%',
@@ -66,22 +62,14 @@ export class PCompByFactories extends Component {
             },
             xaxis: {
               categories: [
-                ['Chindwara'],
-                ['Dapda'],
+                ['Chhindwara'],
+                ['Dapada'],
                 ['Haridwar'],
                 ['Pondicherry'],
                 ['Sumerpur'],
-              //   ['Joe', 'Smith'],
-              //   ['Jake', 'Williams'],
-              //   'Amber',
-              //   ['Peter', 'Brown'],
-              //   ['Mary', 'Evans'],
-              //   ['David', 'Wilson'],
-              //   ['Lily', 'Roberts'],
               ],
               labels: {
                 style: {
-                  // colors: colors,
                   fontSize: '14px',
                   color :"#939393",
                   fontWeight: "700",
@@ -116,16 +104,156 @@ export class PCompByFactories extends Component {
           }
         };
       }
+
+      componentDidMount(){
+        let current = this;
+        current.setState({
+          grafChart:{
+            "prodComplianceDataForAllFactoryResponseDataList": [
+              {
+                "proComplianceVal": "66.6338582677165354"
+              }
+            ],
+            "factories": [
+              {
+                "name": "Chhindwara",
+                "prodCompliancePercentage": "159.375000"
+              },
+              {
+                "name": "Dapada",
+                "prodCompliancePercentage": "67.626700"
+              },
+              {
+                "name": "Haridwar",
+                "prodCompliancePercentage": "42.345700"
+              },
+              {
+                "name": "Pondicherry",
+                "prodCompliancePercentage": "86.287600"
+              },
+              {
+                "name": "Sumerpur",
+                "prodCompliancePercentage": "110.989000"
+              }
+            ],
+            "sKUs": [
+              {
+                "skuName": "NIL MINERAL BAR 400G -BIS - Rs.62",
+                "prodComplianceVal": "127.777700"
+              },
+              {
+                "skuName": "SURF EXCEL BAR 250 GM",
+                "prodComplianceVal": "120.930200"
+              },
+              {
+                "skuName": "SURF EXCEL BAR 250G BIS",
+                "prodComplianceVal": "98.412600"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 100G",
+                "prodComplianceVal": "108.000000"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 100G - 140 CC",
+                "prodComplianceVal": "105.586500"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 150+50 GM",
+                "prodComplianceVal": "105.806400"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 150G",
+                "prodComplianceVal": "95.061700"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 400G",
+                "prodComplianceVal": "114.285700"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 80G",
+                "prodComplianceVal": "77.689200"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 84G 140 CC",
+                "prodComplianceVal": "25.527500"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 84G BIS",
+                "prodComplianceVal": "150.000000"
+              },
+              {
+                "skuName": "SURF EXCEL BAR FW 84G BIS 140 CC",
+                "prodComplianceVal": "125.806400"
+              },
+              {
+                "skuName": "SURF EXCEL BAR MPK 4x200G",
+                "prodComplianceVal": "165.420500"
+              },
+              {
+                "skuName": "SURF EXCEL BAR MPK 4x200G",
+                "prodComplianceVal": "197.297200"
+              },
+              {
+                "skuName": "SURF EXCEL BAR MPK 4x200G OFFER",
+                "prodComplianceVal": "25.225200"
+              }
+            ]
+          }
+        },function(){
+          var ChhindwaraValue = current.state.grafChart.factories.find(item => item.name == "Chhindwara");
+          var DapadaValue = current.state.grafChart.factories.find(item => item.name == "Dapada");
+          var HaridwarValue = current.state.grafChart.factories.find(item => item.name == "Haridwar");
+          var PondicherryValue = current.state.grafChart.factories.find(item => item.name == "Pondicherry");
+          var SumerpurValue = current.state.grafChart.factories.find(item => item.name == "Sumerpur");
+
+          current.setState({
+            series: [
+              {
+              name: '',
+              data: [
+                    {
+                      x: '',
+                      y: ChhindwaraValue.prodCompliancePercentage,
+                      fillColor: ChhindwaraValue.prodCompliancePercentage >= 100 ? '#006400' : '#8B0000'
+                    },
+                    {
+                      x: '',
+                      y: DapadaValue.prodCompliancePercentage,
+                      fillColor: DapadaValue.prodCompliancePercentage >= 100 ? '#006400' : '#8B0000'
+                    },
+                    {
+                      x: '',
+                      y: HaridwarValue.prodCompliancePercentage,
+                      fillColor: HaridwarValue.prodCompliancePercentage >= 100 ? '#006400' : '#8B0000'
+                    },
+                    {
+                      x: '',
+                      y: PondicherryValue.prodCompliancePercentage,
+                      fillColor: PondicherryValue.prodCompliancePercentage >= 100 ? '#006400' : '#8B0000'
+                    },
+                    {
+                      x: '',
+                      y: SumerpurValue.prodCompliancePercentage,
+                      fillColor: SumerpurValue.prodCompliancePercentage >= 100 ? '#006400' : '#8B0000'
+                    },
+               ]
+             },
+          ]
+          });
+
+          });
+      }
+
+
   render() {
     return (
       <>
                       <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="800"
-              height="350"
-
+                      options={this.state.options}
+                      series={this.state.series}
+                      type="bar"
+                      width="800"
+                      height="350"
             />
       </>
     )
