@@ -136,22 +136,13 @@ export class SitewisePDosing extends Component {
                   }
                 }
               }, function () {
-
-                  //  var ChhindwaraData = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy;
                 var ChhindwaraData = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Chhindwara");;
                 var Dapada =  current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Dapada");
                 var Pondicherry = current.state.data.rmDosingAccuracyData.siteWiseDosingAccuracy.find(item => item.factoryName == "Pondicherry");
 
-                console.log("ChhindwaraData")
-                console.log(ChhindwaraData.averageValue)
-                console.log("Dapada")
-                console.log(Dapada.averageValue)
-                console.log("Pondicherry")
-                console.log(Pondicherry.averageValue)
-
                current.setState({
                 series: [{
-                  name: "SCLF Yearly Trend",
+                  name: "Value",
                   data: [{
                     x: 'Chhindwara',
                     y: ChhindwaraData.averageValue
