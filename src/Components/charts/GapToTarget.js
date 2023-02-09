@@ -3,64 +3,87 @@ import Chart from 'react-apexcharts'
 
 
 export class GapToTarget extends Component {
-            constructor(props) {
+
+          constructor(props) {
           super(props);
 
           this.state = {
           
             series: [{
-              data: [400, 430, 448, 470, 540, 580, 690]
-            }],
+              name: 'Target Complete',
+              data: [0.8, 0.95, 5 ,0 , 0
+              ]
+            },
+            {
+              name: 'Not Complete',
+              data: [0, 0, 0, -5.18 , 0
+              ]
+            }
+            ],
             options: {
               chart: {
+                toolbar:false,
                 type: 'bar',
-                height: 350
+                height: 440,
+                stacked: true
               },
-              annotations: {
-                xaxis: [{
-                  x: 500,
-                  borderColor: '#00E396',
-                  label: {
-                    borderColor: '#00E396',
-                    style: {
-                      color: '#fff',
-                      background: '#00E396',
-                    },
-                    text: 'X annotation',
-                  }
-                }],
-                yaxis: [{
-                  y: 'July',
-                  y2: 'September',
-                  label: {
-                    text: 'Y annotation'
-                  }
-                }]
-              },
+              colors: ['#008000', '#FF4560'],
               plotOptions: {
                 bar: {
                   horizontal: true,
-                }
+                  barHeight: '80%',
+                },
               },
               dataLabels: {
                 enabled: true
               },
-              xaxis: {
-                categories: ['June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              stroke: {
+                width: 1,
+                colors: ["#fff"]
               },
+              
               grid: {
                 xaxis: {
                   lines: {
-                    show: true
+                    show: false
                   }
                 }
               },
-              yaxis: {
-                reversed: true,
-                axisTicks: {
-                  show: true
+              // yaxis: {
+              //   min: -5,
+              //   max: 5,
+              //   title: {
+              //     // text: 'Age',
+              //   },
+              // },
+              tooltip: {
+                shared: false,
+                x: {
+                  formatter: function (val) {
+                    return val
+                  }
+                },
+                y: {
+                  formatter: function (val) {
+                    return Math.abs(val) + "%"
+                  }
                 }
-              }
+              },
+              // title: {
+              //   text: 'Mauritius population pyramid 2011'
+              // },
+              // xaxis: {
+              //   categories: ['85+', '80-84', '75-79', '70-74', '65-69'
+              //   ],
+              //   title: {
+              //     text: 'Percent'
+              //   },
+              //   labels: {
+              //     formatter: function (val) {
+              //       return Math.abs(Math.round(val)) + "%"
+              //     }
+              //   }
+              // },
             },
           
           

@@ -27,6 +27,9 @@ export class DepotLocationInspected extends Component {
             }],
             options: {
               chart: {
+                toolbar: {
+                    show: false,
+                },
                 type: 'bar',
                 height: 380
               },

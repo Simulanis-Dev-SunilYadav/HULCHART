@@ -24,6 +24,9 @@ export class UnitFactory extends Component {
             }],
             options: {
               chart: {
+                toolbar: {
+                    show: false,
+                },
                 type: 'bar',
                 height: 350
               },
@@ -67,7 +70,7 @@ export class UnitFactory extends Component {
     return (
       <>
         <div id="chart">
-            <Chart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            <Chart options={this.state.options} series={this.state.series} type="bar" height={410} />
         </div>
       </>
     )
