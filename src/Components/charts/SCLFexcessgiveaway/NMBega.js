@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import GaugeChart from 'react-gauge-chart'
-
+import { token } from "../../../config"
 
 export class NMBega extends Component {
   render() {

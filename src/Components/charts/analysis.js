@@ -2,6 +2,7 @@ import react from 'react';
 import Chart from "react-apexcharts";
 import { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { token } from "../../config"
 
 var now = 80;
 class   Analysis extends Component {

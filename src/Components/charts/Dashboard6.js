@@ -3,7 +3,11 @@ import Cp from './nmbprocesscapability/Cp'
 import Cpk from './nmbprocesscapability/Cpk'
 import Cp1 from './nmbprocesscapability/Cp1'
 import Cpk1 from './nmbprocesscapability/Cpk1'
-import Dapda from './nmbprocesscapability/Dapda'
+import Dapda from './nmbprocesscapability/DapdaPercentage'
+import Pondicherry from './nmbprocesscapability/PondicherryPercentage'
+import Chhindwara from './nmbprocesscapability/ChhindwaraPercentage'
+import Haridwar from './nmbprocesscapability/HaridwarPercentage'
+import Sumerpur from './nmbprocesscapability/SumerpurPercentage'
 
 export class Dashboard6 extends Component {
   render() {
@@ -63,19 +67,19 @@ export class Dashboard6 extends Component {
                             </div>
                             <div className="col-md-3 px-2">
                                  <h3>Pondicherry</h3>
-                                 <Dapda/>
+                                 <Pondicherry/>
                             </div>
                             <div className="col-md-3 px-2">
                                  <h3>Chhindwara</h3>
-                                 <Dapda/>
+                                 <Chhindwara/>
                             </div>
                             <div className="col-md-3 px-2">
                                  <h3>Haridwar</h3>
-                                 <Dapda/>
+                                 <Haridwar/>
                             </div>
                             <div className="col-md-3 px-2">
                                  <h3>Sumerpur</h3>
-                                 <Dapda/>
+                                 <Sumerpur/>
                             </div>
                         </div>
                     </div>

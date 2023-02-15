@@ -41,7 +41,7 @@ h3{
 .activeinactive .notachieved{
     width: 11px;
     height: 11px;
-    background: #9c2626;
+    background: red;
     display: block;
     margin-top: 2px;
     margin-right: 4px;
