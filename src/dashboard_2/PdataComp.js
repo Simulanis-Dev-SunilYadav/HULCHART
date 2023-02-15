@@ -139,8 +139,7 @@ export class PdataComp extends Component {
           axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=2/14/2023&endDate=2/14/2023` , {
                 headers: passHeader,
           }).then((response) =>{
-            console.log("-------response---------")
-            console.log(response)
+           
             current.setState({
               grafChart:response.data
               

@@ -97,8 +97,7 @@ export class PCompByFactories extends Component {
           axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=${formattedTodayDate}&endDate=${formattedTodayDate}` , {
                 headers: passHeader,
           }).then((response) =>{
-          console.log("----response")
-          console.log(response)
+          
             current.setState({
               grafChart:response.data
               
@@ -108,10 +107,7 @@ export class PCompByFactories extends Component {
           var HaridwarValue = current.state.grafChart.factories.find(item => item.name == "Haridwar");
           var PondicherryValue = current.state.grafChart.factories.find(item => item.name == "Pondicherry");
           var SumerpurValue = current.state.grafChart.factories.find(item => item.name == "Sumerpur");
-
-          console.log("DapadaValue")
-          console.log(DapadaValue)
-
+ 
           current.setState({
             series: [
               {

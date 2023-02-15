@@ -11,10 +11,10 @@ export class RmTargetVactual extends Component {
             series: [
               {
               name: 'Target Quality',
-              data: [44, 55, 57, 56, 61]
+              data: [0,0]
               }, {
               name: 'Actual Quality',
-              data: [76, 85, 101, 98, 87]
+              data: [0,0]
               }
              ],
             options: {

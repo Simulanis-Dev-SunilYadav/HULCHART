@@ -84,14 +84,11 @@ export class KBBDapada extends Component {
                 headers: passHeader,
                 }).then((response) =>{
                   console.clear();
-                  // console.log("-----dapda response")
-                  // console.log(response.data);
+                  
                   let dapadaData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Dapada")
                   let dapdaDataValue = dapadaData.factoryKBP.factoryKbpCpValue;
                   let dapdaDataValue2 = dapadaData.factoryKBP.factoryKbpCpkValue;
-                  console.log(dapadaData);
-                  // console.log(dapdaDataValue);
-
+                 
                    let amber={
                     name:'',
                     data:[dapdaDataValue.amber,dapdaDataValue2.amber]
