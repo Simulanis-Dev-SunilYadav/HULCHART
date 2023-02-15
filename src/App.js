@@ -1,15 +1,15 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import DolphinUniliver from './Components/DolphinUniliver';
-import Dashboard1 from './Components/charts/Dashboard1';
-import Dashboard2 from './Components/charts/Dashboard2';
-import Dashboard3 from './Components/charts/Dashboard3';
-import Dashboard4 from './Components/charts/Dashboard4';
-import Dashboard5 from './Components/charts/Dashboard5';
+import DolphinUniliver from './dashboard_1/DolphinUniliver';
+import Dashboard1 from './dashboard_1/Dashboard1';
+import Dashboard2 from './dashboard_2/Dashboard2';
+import Dashboard3 from './dashboard_3/Dashboard3';
+import Dashboard4 from './dashboard_4/Dashboard4';
+import Dashboard5 from './dashboard_5/Dashboard5';
  
-import Dashboard6 from './Components/charts/Dashboard6';
-import Dashboard7 from './Components/charts/Dashboard7';
-import Dashboard8 from './Components/charts/Dashboard8';
+import Dashboard6 from './dashboard_6/Dashboard6';
+import Dashboard7 from './dashboard_7/Dashboard7';
+import Dashboard8 from './dashboard_8/Dashboard8';
 
 function App() {
   return (
