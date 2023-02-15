@@ -54,7 +54,7 @@ export class NMBProductionCompilance extends Component {
       <>
         <GaugeChart 
             id="gauge-chart2"
-            colors={['red', '#F5CD19', '#008000']}
+            colors={['#dc0000', '#f4ca16', '#0b723b']}
             percent={this.state.percent}
             textColor="#000"
             cornerRadius={1}

@@ -18,17 +18,17 @@ export class PCompByFactories extends Component {
                     {
                       x: '',
                       y: 80,
-                      fillColor: '#8B0000'
+                      fillColor: '#dc0000'
                     },
                     {
                       x: '',
                       y: 60,
-                      fillColor: '#8B0000'
+                      fillColor: '#dc0000'
                     },
                     {
                       x: '',
                       y: 70,
-                      fillColor: '#8B0000'
+                      fillColor: '#dc0000'
                     },
                     {
                       x: '',
@@ -50,7 +50,7 @@ export class PCompByFactories extends Component {
             },
             plotOptions: {
               bar: {
-                columnWidth: '45%',
+                columnWidth: '55%',
                 distributed: true,
               }
             },
@@ -186,8 +186,8 @@ export class PCompByFactories extends Component {
               options={this.state.options}
               series={this.state.series}
               type="bar"
-              width="800"
-              height="350"
+              width="100%"
+              height="250"
             />
       </>
     )

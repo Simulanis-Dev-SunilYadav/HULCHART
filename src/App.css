@@ -77,7 +77,7 @@ h3{
   padding: 40px 0px;
 }
 .dashboard1 .gause1{
-  height: 400px;
+  height: 298px;
 }
 
 
@@ -216,4 +216,26 @@ p.kpffre1 {
 }
 .dashboard7{
   padding: 40px 0px;
+}
+
+.nav-pills {
+  border-radius: 0rem;
+}
+li.nav-item:first-child{
+  border-left: 1px solid #ddd
+}
+li.nav-item {
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.nav-pills .nav-link{
+  border-radius: 0px !important;
+}
+.dashheader {
+    background: #fff;
+    padding: 15px 0px;
+    border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 25px;
+    box-shadow: 0px 0px 11px 0px #0000002b;
 }
