@@ -96,57 +96,6 @@ export class ColumnOEE extends Component {
               }).then((response) =>{
             
             var data = response.data;
-            // var data1 = {
-            //   lastUpdate: "01/31/2023",
-            //   overAllTargetValue: 75.8,
-            //   factories: [
-            //     {
-            //       factoryID: 1,
-            //       name: "Dapada",
-            //       latitude: 20.1863,
-            //       longitude: 73.0196,
-            //       oee: 75.05,
-            //       lineCount: 8,
-            //       targetValue: 77.1,
-            //     },
-            //     {
-            //       factoryID: 2,
-            //       name: "Pondicherry",
-            //       latitude: 11.916064,
-            //       longitude: 79.812325,
-            //       oee: 71.47,
-            //       lineCount: 8,
-            //       targetValue: 74.3,
-            //     },
-            //     {
-            //       factoryID: 3,
-            //       name: "Chhindwara",
-            //       latitude: 22.0574,
-            //       longitude: 78.9382,
-            //       oee: 76.8,
-            //       lineCount: 7,
-            //       targetValue: 75.0,
-            //     },
-            //     {
-            //       factoryID: 4,
-            //       name: "Haridwar",
-            //       latitude: 29.9457,
-            //       longitude: 78.1642,
-            //       oee: 69.69,
-            //       lineCount: 7,
-            //       targetValue: 76.7,
-            //     },
-            //     {
-            //       factoryID: 5,
-            //       name: "Sumerpur",
-            //       latitude: 25.152645,
-            //       longitude: 73.08228,
-            //       oee: 74.76,
-            //       lineCount: 4,
-            //       targetValue: 75.7,
-            //     },
-            //   ],
-            // };
             var Chhindwara = data.factories.find((item) => item.name == "Chhindwara");
             var Dapada = data.factories.find((item) => item.name == "Dapada");
             var Haridwar = data.factories.find((item) => item.name == "Haridwar");

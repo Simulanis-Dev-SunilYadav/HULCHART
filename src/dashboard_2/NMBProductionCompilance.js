@@ -17,35 +17,37 @@ export class NMBProductionCompilance extends Component {
     let mm = today.getMonth() + 1;
     let dd = today.getDate();
    const formattedTodayDate = mm + '/' + dd + '/' + yyyy;
-
+   var yesterday = new Date(today.getTime() - 24*60*60*1000);
+   const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
 
     let current = this;
-
+      console.log("token")
+      console.log(token)
     const passHeader = {
       Authorization: token,
       Accept: "application/json",
         "Content-Type": "application/json",
           };
-      // axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=${formattedTodayDate}&endDate=${formattedTodayDate}` , {
-      axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=2/14/2023&endDate=2/14/2023` , {
-            headers: passHeader,
-      }).then((response) =>{
-        console.log("----response")
-        console.log(response)
+          // axios.get(`https://bnlwe-gs-q-57322-apimgt-01.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=2/14/2023&endDate=2/14/2023` , {
+          axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetProdComplianceDataForAllFactory?duration=daily&startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}` , {
+                headers: passHeader,
+          }).then((response) =>{
+            console.log("response")
+            console.log(response)
+              current.setState({
+                grafChart:response.data
+              },function(){
+                var graphValue = current.state.grafChart.prodComplianceDataForAllFactoryResponseDataList[0].proComplianceVal;
+                
+                var _percent = Number("."+graphValue.toString().replaceAll(".",''));
+                console.log("_percent")
+                console.log(_percent)
+                current.setState({percent:_percent})});
 
-          current.setState({
-            grafChart:response.data
-          },function(){
-            var graphValue = current.state.grafChart.prodComplianceDataForAllFactoryResponseDataList[0].proComplianceVal;
-            console.log("graphValue")
-            console.log(graphValue)
-            var _percent = Number("."+graphValue.toString().replaceAll(".",''));
-            current.setState({percent:_percent})});
-
-      }).catch((err)=>{
-                console.log("--err-");
-                console.log(err)
-              });
+          }).catch((err)=>{
+                    console.log("--err-");
+                    console.log(err)
+                  });
 
   }
 

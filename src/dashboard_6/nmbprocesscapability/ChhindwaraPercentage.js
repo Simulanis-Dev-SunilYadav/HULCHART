@@ -84,8 +84,7 @@ export class Dapda extends Component {
                   headers: passHeader,
                   }).then((response) =>{
                     console.clear();
-                    console.log("-----pondchery response")
-                    console.log(response.data);
+                    
                     let pondicherryData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Chhindwara")
                     let kbp_Cp_Data_Value = pondicherryData.factoryKPP.factoryKppCpValue;
                     let kbp_Cpk_Data_Value = pondicherryData.factoryKPP.factoryKppCpkValue;
