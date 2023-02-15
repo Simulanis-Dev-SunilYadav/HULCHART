@@ -83,26 +83,22 @@ export class KBBDapada extends Component {
               axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                 headers: passHeader,
                 }).then((response) =>{
-                  console.clear();
-                  // console.log("-----dapda response")
-                  // console.log(response.data);
-                  let dapadaData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Dapada")
-                  let dapdaDataValue = dapadaData.factoryKBP.factoryKbpCpValue;
-                  let dapdaDataValue2 = dapadaData.factoryKBP.factoryKbpCpkValue;
-                  console.log(dapadaData);
-                  // console.log(dapdaDataValue);
+                  let pondicherryData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Pondicherry")
+                  let kbp_Cp_Data_Value = pondicherryData.factoryKBP.factoryKbpCpValue;
+                  let kbp_Cpk_Data_Value = pondicherryData.factoryKBP.factoryKbpCpkValue;
+                  console.log(pondicherryData);
 
                    let amber={
                     name:'',
-                    data:[dapdaDataValue.amber,dapdaDataValue2.amber]
+                    data:[kbp_Cp_Data_Value.amber,kbp_Cpk_Data_Value.amber]
                    };
                    let red={
                     name:'',
-                    data:[dapdaDataValue.red,dapdaDataValue2.red]
+                    data:[kbp_Cp_Data_Value.red,kbp_Cpk_Data_Value.red]
                    };
                    let green={
                     name:'',
-                    data:[dapdaDataValue.green,dapdaDataValue2.green]
+                    data:[kbp_Cp_Data_Value.green,kbp_Cpk_Data_Value.green]
                    };
                   current.setState({
                     series:[red,amber,green]

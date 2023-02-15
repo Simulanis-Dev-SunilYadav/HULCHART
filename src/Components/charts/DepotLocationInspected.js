@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-
+import { token } from "../../config"
 
 export class DepotLocationInspected extends Component {
             constructor(props) {

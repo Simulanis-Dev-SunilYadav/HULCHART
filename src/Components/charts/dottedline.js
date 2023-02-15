@@ -2,7 +2,7 @@ import React from 'react';
 import ReactApexChart from "react-apexcharts";
 import { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-
+import { token } from "../../config"
 
 class LineDotted extends React.Component {
     constructor(props) {

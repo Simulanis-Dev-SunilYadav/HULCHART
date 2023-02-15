@@ -86,7 +86,7 @@ export class KBBDapada extends Component {
                   console.clear();
                   // console.log("-----dapda response")
                   // console.log(response.data);
-                  let dapadaData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Dapada")
+                  let dapadaData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Chhindwara")
                   let dapdaDataValue = dapadaData.factoryKBP.factoryKbpCpValue;
                   let dapdaDataValue2 = dapadaData.factoryKBP.factoryKbpCpkValue;
                   console.log(dapadaData);

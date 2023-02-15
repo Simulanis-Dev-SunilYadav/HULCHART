@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import DosingAccuracyP from './SCLFdosingaccuracy/DosingAccuracyP'
 import RmTargetVactual from './SCLFdosingaccuracy/RmTargetVactual'
 
+
 export class Dashboard7 extends Component {
+  
+
   render() {
     return (
       <>
