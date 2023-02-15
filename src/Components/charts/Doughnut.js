@@ -67,7 +67,7 @@ export class Doughnut extends Component {
             width={300}
             height={300}
             legend={false}
-            colors={['green', '#a9a9a9']}
+            colors={['#0b723b', '#a9a9a9']}
             strokeColor='transparent'
          />
          <div className="activeinactive">

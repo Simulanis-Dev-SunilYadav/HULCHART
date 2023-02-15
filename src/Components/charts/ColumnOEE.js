@@ -13,7 +13,7 @@ export class ColumnOEE extends Component {
             {
               x: "",
               y: 120,
-              fillColor: "#006400",
+              fillColor: "#0b723b",
             },
             {
               x: "",
@@ -164,40 +164,40 @@ export class ColumnOEE extends Component {
                       y: `${Chhindwara.oee}`,
                       fillColor:
                         `${Chhindwara.oee}` > `${Chhindwara.targetValue}`
-                          ? "#006400"
-                          : "#e10f0f",
+                          ? "#0b723b"
+                          : "#ff0000",
                     },
                     {
                       x: "",
                       y: `${Dapada.oee}`,
                       fillColor:
                         `${Dapada.oee}` > `${Dapada.targetValue}`
-                          ? "#006400"
-                          : "#e10f0f",
+                          ? "#0b723b"
+                          : "#ff0000",
                     },
                     {
                       x: "",
                       y: `${Haridwar.oee}`,
                       fillColor:
                         `${Haridwar.oee}` > `${Haridwar.targetValue}`
-                          ? "#006400"
-                          : "#e10f0f",
+                          ? "#0b723b"
+                          : "#ff0000",
                     },
                     {
                       x: "",
                       y: `${Pondicherry.oee}`,
                       fillColor:
                         `${Pondicherry.oee}` > `${Pondicherry.targetValue}`
-                          ? "#006400"
-                          : "#e10f0f",
+                          ? "#0b723b"
+                          : "#ff0000",
                     },
                     {
                       x: "",
                       y: `${Sumerpur.oee}`,
                       fillColor:
                         `${Sumerpur.oee}` > `${Sumerpur.targetValue}`
-                          ? "#006400"
-                          : "#e10f0f",
+                          ? "#0b723b"
+                          : "#ff0000",
                     },
                   ],
                 },

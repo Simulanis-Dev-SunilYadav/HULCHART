@@ -51,9 +51,13 @@ export class NmbSemichart extends Component {
       <>
         <GaugeChart 
           id="gauge-chart2"
-          colors={['#e22f2f', '#F5CD19', '#008000']}
+          colors={['red', '#F5CD19', '#008000']}
           percent={this.state.percent}
           textColor="#000"
+          cornerRadius={1}
+            arcPadding={0}
+            arcWidth={.3}
+            arcsLength={[0.9, 0.05, 0.05]}
         />
       </>
     )
