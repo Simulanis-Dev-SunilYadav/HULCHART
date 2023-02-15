@@ -24,7 +24,7 @@ export class PdataComp extends Component {
                     },
                 type: 'bar',
                 height: 380,
-                width: 200
+                // width: 700
               },
               plotOptions: {
                 bar: {
@@ -65,7 +65,7 @@ export class PdataComp extends Component {
                       color: "#939393",
                       fontWeight:"600",
                       fontFamily: "Arial, Helvetica, sans-serif",
-                      minWidth:"500"
+                      minWidth: "500px"
                     }
                   }
               },
@@ -84,11 +84,10 @@ export class PdataComp extends Component {
                     style: {
                       color: "#939393",
                       fontWeight:"600",
-                      fontSize:"13px",  
+                      fontSize:"9px",  
                       fontFamily: "Arial, Helvetica, sans-serif",
                       textAlign:"left !important",
-                      minWidth: 250
-                        
+                      maxWidth: 500
                     }
                   } 
               },
