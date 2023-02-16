@@ -61,16 +61,12 @@ export class Dashboard9 extends Component {
        var threeYesterday = new Date(today.getTime() - 4*24*60*60*1000);
        const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
        const threeFormattedYesterdayDate = threeYesterday.getMonth() + 1 + '/' + threeYesterday.getDate() + '/' + threeYesterday.getFullYear();
-     
-
-
 
        const passHeader = {
           Authorization: token,
           Accept: "application/json",
             "Content-Type": "application/json",
               };
-
 
               if(current.state.type == "daily"){
                     dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
@@ -83,7 +79,6 @@ export class Dashboard9 extends Component {
             }else if(current.state.type == "yearly"){
                     dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=5&duration=yearly`
               }
-
 
               axios.get(`${dataFormateType}` , {
                 headers: passHeader,
@@ -260,8 +255,8 @@ export class Dashboard9 extends Component {
                                                     value: this.state.value22,
                                                 },
                                             ]}
-                                            width={250}
-                                            height={250}
+                                            width={170}
+                                            height={170}
                                             legend={false}
                                             colors={this.state.color2}
                                             // colors={['#0b723b', '#a9a9a9']}
@@ -287,8 +282,8 @@ export class Dashboard9 extends Component {
                                                     value: this.state.value33,
                                                 },
                                             ]}
-                                            width={250}
-                                            height={250}
+                                            width={170}
+                                            height={170}
                                             legend={false}
                                              // colors={['#0b723b', '#a9a9a9']}
                                             colors={this.state.color3}
@@ -314,8 +309,8 @@ export class Dashboard9 extends Component {
                                                     value: this.state.value44,
                                                 },
                                             ]}
-                                            width={250}
-                                            height={250}
+                                            width={170}
+                                            height={170}
                                             legend={false}
                                             // colors={['#0b723b', '#a9a9a9']}
                                             colors={this.state.color4}
@@ -341,8 +336,8 @@ export class Dashboard9 extends Component {
                                                     value: this.state.value55,
                                                 },
                                             ]}
-                                            width={250}
-                                            height={250}
+                                            width={170}
+                                            height={170}
                                             legend={false}
                                             // colors={['#0b723b', '#a9a9a9']}
                                             colors={this.state.color5}
