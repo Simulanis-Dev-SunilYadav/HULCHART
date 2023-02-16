@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Chart  from 'react-apexcharts'
 import axios from 'axios';
-import { token } from "../../config"
+import { token,apiUrl } from "../../config"
 
 
 export class Cpk1 extends Component {
@@ -50,7 +50,7 @@ export class Cpk1 extends Component {
             Accept: "application/json",
               "Content-Type": "application/json",
                 };
-              axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
+              axios.get(`${apiUrl}/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                 headers: passHeader,
                 }).then((response) =>{
                   var valueArray = [response.data.overAllKBP.totalKbpCpkValue.red,   response.data.overAllKBP.totalKbpCpkValue.amber,  response.data.overAllKBP.totalKbpCpkValue.green]

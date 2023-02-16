@@ -12,7 +12,7 @@ export class Dashboard2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           type:"daily",  // "daily", "weekly", "monthly", "yearly"
+           type:"daily",     // "daily", "weekly", "monthly", "yearly"
            grafChart:null,
            productName:[],
            productValue:[],
@@ -64,10 +64,8 @@ export class Dashboard2 extends Component {
                     }
                 },
                 yaxis:{
-                    axisBorder: {
-                        show: true
-                        },
-                        labels:{
+                    axisBorder: { show: true },
+                    labels:{
                         style: {
                         color: "#939393",
                         fontWeight:"600",
@@ -286,12 +284,21 @@ export class Dashboard2 extends Component {
                 ]
                 });
             
-                current.state.grafChart.sKUs.map(e=>{
+               
+        // short Object Array_______________
+                response.data.sKUs.sort((a, b) => {
+                  if (a.skuName < b.skuName) return -1;
+                  if (a.skuName > b.skuName) return 1;
+                  return 0;
+                 });
+
+                response.data.sKUs.map(e=>{
                     product_name.push(e.skuName);
                     product_value.push(Number(e.prodComplianceVal));
                     product_color.push(Number(e.prodComplianceVal)>= 95 ? '#0b723b' : '#dc0000' )
                 });
-              
+               console.log("response.data")
+                console.log(response.data.sKUs)
                 current.setState({
                   series1:[{
                     data:product_value
