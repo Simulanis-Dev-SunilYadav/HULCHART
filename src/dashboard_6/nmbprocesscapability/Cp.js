@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import { token } from "../../config"
+import { token,apiUrl } from "../../config"
 
 export class Cp extends Component {
         constructor(props) {
@@ -49,7 +49,7 @@ export class Cp extends Component {
             Accept: "application/json",
               "Content-Type": "application/json",
                 };
-              axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
+              axios.get(`${apiUrl}/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                 headers: passHeader,
                 }).then((response) =>{
                   var valueArray = [response.data.overAllKPP.totalKppCpValue.red,   response.data.overAllKPP.totalKppCpValue.amber,  response.data.overAllKPP.totalKppCpValue.green]

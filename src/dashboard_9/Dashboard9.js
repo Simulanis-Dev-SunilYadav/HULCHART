@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Doughnut1 from './Doughnut1'
-import Doughnut2 from './Doughnut2'
 import DonutChart from 'react-donut-chart';
 import axios from "axios";
 import { token,apiUrl } from "../config"
@@ -9,33 +7,36 @@ export class Dashboard9 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectOption:5,
             type:"daily",  // "daily", "weekly", "monthly", "yearly"
             graph1:null,
             topFiveLosses:[],
-            label1:'',
-            value1:'',
-            color1:[],
-            value11:'',
+            chartGraph:[],
+            DonutChart:[],
+            // label1:'',
+            // value1:'',
+            // color1:[],
+            // value11:'',
 
-            label2:'',
-            value2:'',
-            color2:[],
-            value22:'',
+            // label2:'',
+            // value2:'',
+            // color2:[],
+            // value22:'',
 
-            label3:'',
-            value3:'',
-            color3:[],
-            value33:'',
+            // label3:'',
+            // value3:'',
+            // color3:[],
+            // value33:'',
 
-            label4:'',
-            value4:'',
-            color4:[],
-            value44:'',
+            // label4:'',
+            // value4:'',
+            // color4:[],
+            // value44:'',
 
-            label5:'',
-            value5:'',
-            color5:[],
-            value55:'',
+            // label5:'',
+            // value5:'',
+            // color5:[],
+            // value55:'',
         }
         }
 
@@ -45,23 +46,19 @@ export class Dashboard9 extends Component {
        }
 
       getFlowChartData=async()=>{
-        let current = this;
         console.clear();
-        var fullNumber;
+
+        let current = this;
         var dataFormateType;
-        var product_name=[];
-        var product_value=[];
-        var product_color=[];
         const today = new Date();
         const yyyy = today.getFullYear();
         let mm = today.getMonth() + 1;
         let dd = today.getDate();
        const formattedTodayDate = mm + '/' + dd + '/' + yyyy;
-       var yesterday = new Date(today.getTime() - 24*60*60*1000);
-       var threeYesterday = new Date(today.getTime() - 4*24*60*60*1000);
-       const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
-       const threeFormattedYesterdayDate = threeYesterday.getMonth() + 1 + '/' + threeYesterday.getDate() + '/' + threeYesterday.getFullYear();
 
+       const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
+       let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
+       
        const passHeader = {
           Authorization: token,
           Accept: "application/json",
@@ -69,72 +66,69 @@ export class Dashboard9 extends Component {
               };
 
               if(current.state.type == "daily"){
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
               }else if(current.state.type == "weekly"){
-                const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
-                let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
               }else if(current.state.type == "monthly"){
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=5&duration=monthly`
+                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=${this.state.selectOption}&duration=monthly`
             }else if(current.state.type == "yearly"){
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=5&duration=yearly`
+                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=${this.state.selectOption}&duration=yearly`
               }
 
               axios.get(`${dataFormateType}` , {
                 headers: passHeader,
                 }).then((response) =>{
-                     console.clear();
-                     console.log("------------------")                     
-                     console.log(response);
-                     console.log(response.data.oeeLines[0].topFiveLosses);
-                    //  console.log(response.data.oeeLines[0].lines);
-                      let FW1 = response.data.oeeLines[0].lines.find((e)=>e.lineName == "FW1")
-                      let FW2 = response.data.oeeLines[0].lines.find((e)=>e.lineName == "FW2")
-                      let FW3 = response.data.oeeLines[0].lines.find((e)=>e.lineName == "FW3")
-                      let FW4 = response.data.oeeLines[0].lines.find((e)=>e.lineName == "FW4")
-                      
-                      current.setState({
+                    
+                    // console.log("dashboard 9")
+                    // var reA = /[^a-zA-Z]/g;
+                    // var reN = /[^0-9]/g;
+                    // let tt = response.data.oeeLines[0].lines.sort((a, b) => {
+                    //     // var aA = a.replace(reA, "");
+                    //     // var bA = b.replace(reA, "");
+                    //     // if (aA === bA) {
+                    //     //     var aN = parseInt(a.replace(reN, ""), 10);
+                    //     //     var bN = parseInt(b.replace(reN, ""), 10);
+                    //     //     return aN === bN ? 0 : aN > bN ? 1 : -1;
+                    //     //   } else {
+                    //     //     return aA > bA ? 1 : -1;
+                    //     //   }
+                    //      if (a.lineName < b.lineName) return -1;
+                    //      if (a.lineName > b.lineName) return 1;
+                    //      return 0;
+                    //     });
+                        
+                    // console.log(tt)
+
+                    const alphaNumericSort = (arr = []) => {
+                        const sorter = (a, b) => {
+                           const isNumber = (v) => (+v).toString() === v;
+                           const aPart = a.lineName.match(/\d+|\D+/g);
+                           const bPart = b.lineName.match(/\d+|\D+/g);
+                           let i = 0; let len = Math.min(aPart.length, bPart.length);
+                           while (i < len && aPart[i] === bPart[i]) { i++; };
+                              if (i === len) {
+                                 return aPart.length - bPart.length;
+                           };
+                           if (isNumber(aPart[i]) && isNumber(bPart[i])) {
+                              return aPart[i] - bPart[i];
+                           };
+                           return aPart[i].localeCompare(bPart[i]); };
+                           arr.sort(sorter);
+                     };
+                     alphaNumericSort(response.data.oeeLines[0].lines);
+
+                    current.setState({
+                        chartGraph : response.data.oeeLines[0].lines
+                      });
+
+                    current.setState({
                         topFiveLosses : response.data.oeeLines[0].topFiveLosses
                       })
-                      current.setState({
-                       label1:`Tgt-${response.data.oeeLines[0].oeeTarget}`,
-                       value1:  Number(`${response.data.oeeLines[0].oee}`),
-                       value11: 100-Number(`${response.data.oeeLines[0].oee}`),
-                       color1:[Number(`${response.data.oeeLines[0].oee}`) > Number(`${response.data.oeeLines[0].oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]   
-                    });
-                    
-                // FW_1
+                      
                     current.setState({
-                       label2:`Tgt-${FW1.oeeTarget}`,
-                       value2:  Number(`${FW1.oee}`),
-                       value22: 100-Number(`${FW1.oee}`),
-                       color2:[ Number(`${FW1.oee}`) > Number(`${FW1.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]
+                        DonutChart : response.data.oeeLines[0]
+                      })
 
-                        });
-
-                // FW_2
-                    current.setState({
-                       label3:`Tgt-${FW2.oeeTarget}`,
-                       value3:  Number(`${FW2.oee}`),
-                       value33: 100-Number(`${FW2.oee}`),
-                       color3:[ Number(`${FW2.oee}`) > Number(`${FW2.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]
-                        });
-
-                // FW_3
-                    current.setState({
-                       label4:`Tgt-${FW3.oeeTarget}`,
-                       value4:  Number(`${FW3.oee}`),
-                       value44: 100-Number(`${FW3.oee}`),
-                       color4:[ Number(`${FW3.oee}`) > Number(`${FW3.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]
-                        });
-
-                // FW_4
-                    current.setState({
-                            label5:`Tgt-${FW4.oeeTarget}`,
-                            value5:  Number(`${FW4.oee}`),
-                            value55: 100-Number(`${FW4.oee}`),
-                            color5:[ Number(`${FW4.oee}`) > Number(`${FW4.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]
-                             });
                 }).catch((err)=>{
                     console.log("--err")
                     console.log(err)
@@ -150,6 +144,19 @@ export class Dashboard9 extends Component {
             this.getFlowChartData(); 
         })
       }
+
+      selectFactory=(e)=>{
+        let current = this;
+        console.log("hit");
+        console.log(e.target.value);
+        current.setState({
+            selectOption: Number(e.target.value)
+        })
+         setTimeout(()=>{
+            this.getFlowChartData()
+         },250)
+      }
+
 
 
   render() {
@@ -179,8 +186,16 @@ export class Dashboard9 extends Component {
                             </ul>
                         </div>
                         <div className="col-md-4">
-                            {/* <DateRangePicker /> */}
+                            <label for="cars" >select a factory:</label>
+                                <select name="location" id="location" onChange={this.selectFactory}>
+                                        <option value="3">Chhindwara</option>
+                                        <option value="1">Dapada</option>
+                                        <option value="4">Haridwar</option>
+                                        <option value="2">Pondicherry</option>
+                                        <option value="5" selected="selected">Sumerpur</option>
+                                </select>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -208,23 +223,21 @@ export class Dashboard9 extends Component {
                                     <div className="card-body">
                                         <div className="lwisesbox">
                                             <h3 className='text-center'>SUMERPUR</h3>
-                                            {/* <Doughnut1/> */}
-
                                           <DonutChart
                                             data={[
                                                 {
-                                                    label: this.state.label1,
-                                                    value: this.state.value1,
+                                                    label: `Tgt-${this.state.DonutChart.oeeTarget}`,
+                                                    value: Number(`${this.state.DonutChart.oee}`),
                                                 },
                                                 {
                                                     label: '',
-                                                    value: this.state.value11,
+                                                    value: 100-Number(`${this.state.DonutChart.oee}`),
                                                 },
                                             ]}
                                             width={250}
                                             height={250}
                                             legend={false}
-                                            colors={this.state.color1}
+                                            colors={[Number(`${this.state.DonutChart.oee}`) > Number(`${this.state.DonutChart.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]}
                                             // colors={['#0b723b', '#a9a9a9']}
                                             strokeColor='transparent'
                                             emptyOffset={1}
@@ -241,114 +254,38 @@ export class Dashboard9 extends Component {
                            
                             <div className="col-md-9">
                                 <div className="row">
-                                    <div className="col-md-3">
-                                        <div className="donut2boxs">
-                                            <p>FW1</p>
-                                            <DonutChart
-                                            data={[
-                                                {
-                                                    label: this.state.label2,
-                                                    value: this.state.value2,
-                                                },
-                                                {
-                                                    label: '',
-                                                    value: this.state.value22,
-                                                },
-                                            ]}
-                                            width={170}
-                                            height={170}
-                                            legend={false}
-                                            colors={this.state.color2}
-                                            // colors={['#0b723b', '#a9a9a9']}
-                                            strokeColor='transparent'
-                                            emptyOffset={1}
-                                            onMouseEnter={true}
-                                            onClick={false}
-                                            clickToggle={false}          
-                                        />
+                                    {this.state.chartGraph.map((list,item)=>
+
+                                 
+                                        <div className="col-md-3">
+                                            <div className="donut2boxs">
+                                                <p>{list.lineName}</p>
+                                                <DonutChart
+                                                data={[
+                                                    {
+                                                        label: `Tgt-${list.oeeTarget}`,
+                                                        value: Number(`${list.oee}`),
+                                                    },
+                                                    {
+                                                        label: '',
+                                                        value: 100-Number(`${list.oee}`),
+                                                    },
+                                                ]}
+                                                width={170}
+                                                height={170}
+                                                legend={false}
+                                                colors={[ Number(`${list.oee}`) > Number(`${list.oeeTarget}`) ? "#0b723b" : "#fa0505" , '#a9a9a9' ]}
+                                                strokeColor='transparent'
+                                                emptyOffset={1}
+                                                onMouseEnter={true}
+                                                onClick={false}
+                                                clickToggle={false}          
+                                            />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-md-3">
-                                        <div className="donut2boxs">
-                                            <p>FW2</p>
-                                            <DonutChart
-                                            data={[
-                                                {
-                                                    label: this.state.label3,
-                                                    value: this.state.value3,
-                                                },
-                                                {
-                                                    label: '',
-                                                    value: this.state.value33,
-                                                },
-                                            ]}
-                                            width={170}
-                                            height={170}
-                                            legend={false}
-                                             // colors={['#0b723b', '#a9a9a9']}
-                                            colors={this.state.color3}
-                                            strokeColor='transparent'
-                                            emptyOffset={1}
-                                            onMouseEnter={true}
-                                            onClick={false}
-                                            clickToggle={false}          
-                                        />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-3">
-                                        <div className="donut2boxs">
-                                            <p>FW3</p>
-                                            <DonutChart
-                                            data={[
-                                                {
-                                                    label: this.state.label4,
-                                                    value: this.state.value4,
-                                                },
-                                                {
-                                                    label: '',
-                                                    value: this.state.value44,
-                                                },
-                                            ]}
-                                            width={170}
-                                            height={170}
-                                            legend={false}
-                                            // colors={['#0b723b', '#a9a9a9']}
-                                            colors={this.state.color4}
-                                            strokeColor='transparent'
-                                            emptyOffset={1}
-                                            onMouseEnter={true}
-                                            onClick={false}
-                                            clickToggle={false}          
-                                        />
-                                        </div>
-                                    </div>
-                                    <div className="col-md-3">
-                                        <div className="donut2boxs">
-                                            <p>FW4</p>
-                                            <DonutChart
-                                            data={[
-                                                {
-                                                    label: this.state.label5,
-                                                    value: this.state.value5,
-                                                },
-                                                {
-                                                    label: '',
-                                                    value: this.state.value55,
-                                                },
-                                            ]}
-                                            width={170}
-                                            height={170}
-                                            legend={false}
-                                            // colors={['#0b723b', '#a9a9a9']}
-                                            colors={this.state.color5}
-                                            strokeColor='transparent'
-                                            emptyOffset={1}
-                                            onMouseEnter={true}
-                                            onClick={false}
-                                            clickToggle={false}          
-                                        />
-                                        </div>
-                                    </div>
+
+
+                                      )}
                               
                                 </div>
                             </div>
@@ -368,7 +305,7 @@ export class Dashboard9 extends Component {
                               <tr>
                                 <td>{list.name}</td>
                                 <td className='text-center'>{list.duration}</td>
-                                <td className='text-center'>{list.percentage}</td>
+                                <td className='text-center'>{list.percentage}%</td>
                              </tr>
                             )}
                                
