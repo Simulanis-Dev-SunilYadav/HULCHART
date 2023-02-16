@@ -96,91 +96,119 @@ export class Dashboard3 extends Component {
 
       getFlowChartData=()=>{
             let current = this;
-            const passHeader = {
-            Authorization: token,
-            Accept: "application/json",
-                "Content-Type": "application/json",
-                };
-                // axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetOEEDashboard?duration=monthly` , {
-                axios.get(`${apiUrl}/nmbapi/GetOEEDashboard?duration=${this.state.type}` , {
+            var dataFormateType;
+
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            let mm = today.getMonth() + 1;
+            let dd = today.getDate();
+            const formattedTodayDate = mm + '/' + dd + '/' + yyyy;
+            var yesterday = new Date(today.getTime() - 24*60*60*1000);
+            var threeYesterday = new Date(today.getTime() - 4*24*60*60*1000);
+            const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
+            const threeFormattedYesterdayDate = threeYesterday.getMonth() + 1 + '/' + threeYesterday.getDate() + '/' + threeYesterday.getFullYear();
+
+
+            if(current.state.type == "daily"){
+               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+            }else if(current.state.type == "weekly"){
+               const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
+               let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
+               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&duration=${this.state.type}`
+            }else if(current.state.type == "monthly"){
+               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?duration=monthly`
+          }else if(current.state.type == "yearly"){
+               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?duration=yearly`
+          }
+
+        const passHeader = {
+              Authorization: token,
+              Accept: "application/json",
+                  "Content-Type": "application/json",
+                               };
+
+
+        axios.get(`${dataFormateType}` , {
                     headers: passHeader,
                 }).then((response) =>{
-                    console.clear();
-                    console.log(this.state.type)
-                    console.log(response.data)
+                  console.clear();
+                  console.log("dashboard 3")
+                  console.log(response)
+                  console.log(response.data.factories.length == 0)
+                   if(response.data.factories.length !== 0){
                     current.setState({
-                        grafChart: response.data
-                    },function(){
-                        var Chhindwara = current.state.grafChart.factories.find(item => item.name == "Chhindwara");
-                        var Dapada = current.state.grafChart.factories.find(item => item.name == "Dapada");
-                        var Haridwar = current.state.grafChart.factories.find(item => item.name == "Haridwar");
-                        var Pondicherry = current.state.grafChart.factories.find(item => item.name == "Pondicherry");
-                        var Sumerpur = current.state.grafChart.factories.find(item => item.name == "Sumerpur");
-                        var notAchieved = (Number(Chhindwara.oee)+Number(Dapada.oee)+Number(Haridwar.oee)+Number(Pondicherry.oee)+Number(Sumerpur.oee))/5;
-                        current.setState({not_Achieved:notAchieved});
-                        var achieved = (Number(100-notAchieved));
-                        current.setState({_achieved:achieved});
+                          grafChart: response.data
+                      },function(){
+                          var Chhindwara = current.state.grafChart.factories.find(item => item.name == "Chhindwara");
+                          var Dapada = current.state.grafChart.factories.find(item => item.name == "Dapada");
+                          var Haridwar = current.state.grafChart.factories.find(item => item.name == "Haridwar");
+                          var Pondicherry = current.state.grafChart.factories.find(item => item.name == "Pondicherry");
+                          var Sumerpur = current.state.grafChart.factories.find(item => item.name == "Sumerpur");
+                          var notAchieved = (Number(Chhindwara.oee)+Number(Dapada.oee)+Number(Haridwar.oee)+Number(Pondicherry.oee)+Number(Sumerpur.oee))/5;
+                          current.setState({not_Achieved:notAchieved});
+                          var achieved = (Number(100-notAchieved));
+                          current.setState({_achieved:achieved});
 
 
-                        var data = current.state.grafChart;
-                        var Chhindwara = data.factories.find((item) => item.name == "Chhindwara");
-                        var Dapada = data.factories.find((item) => item.name == "Dapada");
-                        var Haridwar = data.factories.find((item) => item.name == "Haridwar");
-                        var Pondicherry = data.factories.find((item) => item.name == "Pondicherry");
-                        var Sumerpur = data.factories.find((item) => item.name == "Sumerpur");
-                      
-                        current.setState({
-                          series: [
-                            {
-                              name: "OEE",
-                              data: [
-                                {
-                                  x: "",
-                                  y: `${Chhindwara.oee}`,
-                                  fillColor:
-                                    `${Chhindwara.oee}` > `${Chhindwara.targetValue}`
-                                      ? "#0b723b"
-                                      : "#ff0000",
-                                },
-                                {
-                                  x: "",
-                                  y: `${Dapada.oee}`,
-                                  fillColor:
-                                    `${Dapada.oee}` > `${Dapada.targetValue}`
-                                      ? "#0b723b"
-                                      : "#ff0000",
-                                },
-                                {
-                                  x: "",
-                                  y: `${Haridwar.oee}`,
-                                  fillColor:
-                                    `${Haridwar.oee}` > `${Haridwar.targetValue}`
-                                      ? "#0b723b"
-                                      : "#ff0000",
-                                },
-                                {
-                                  x: "",
-                                  y: `${Pondicherry.oee}`,
-                                  fillColor:
-                                    `${Pondicherry.oee}` > `${Pondicherry.targetValue}`
-                                      ? "#0b723b"
-                                      : "#ff0000",
-                                },
-                                {
-                                  x: "",
-                                  y: `${Sumerpur.oee}`,
-                                  fillColor:
-                                    `${Sumerpur.oee}` > `${Sumerpur.targetValue}`
-                                      ? "#0b723b"
-                                      : "#ff0000",
-                                },
-                              ],
-                            },
-                          ],
-                        });
+                          var data = current.state.grafChart;
+                          var Chhindwara = data.factories.find((item) => item.name == "Chhindwara");
+                          var Dapada = data.factories.find((item) => item.name == "Dapada");
+                          var Haridwar = data.factories.find((item) => item.name == "Haridwar");
+                          var Pondicherry = data.factories.find((item) => item.name == "Pondicherry");
+                          var Sumerpur = data.factories.find((item) => item.name == "Sumerpur");
+                        
+                          current.setState({
+                            series: [
+                              {
+                                name: "OEE",
+                                data: [
+                                  {
+                                    x: "",
+                                    y: `${Chhindwara.oee}`,
+                                    fillColor:
+                                      `${Chhindwara.oee}` > `${Chhindwara.targetValue}`
+                                        ? "#0b723b"
+                                        : "#ff0000",
+                                  },
+                                  {
+                                    x: "",
+                                    y: `${Dapada.oee}`,
+                                    fillColor:
+                                      `${Dapada.oee}` > `${Dapada.targetValue}`
+                                        ? "#0b723b"
+                                        : "#ff0000",
+                                  },
+                                  {
+                                    x: "",
+                                    y: `${Haridwar.oee}`,
+                                    fillColor:
+                                      `${Haridwar.oee}` > `${Haridwar.targetValue}`
+                                        ? "#0b723b"
+                                        : "#ff0000",
+                                  },
+                                  {
+                                    x: "",
+                                    y: `${Pondicherry.oee}`,
+                                    fillColor:
+                                      `${Pondicherry.oee}` > `${Pondicherry.targetValue}`
+                                        ? "#0b723b"
+                                        : "#ff0000",
+                                  },
+                                  {
+                                    x: "",
+                                    y: `${Sumerpur.oee}`,
+                                    fillColor:
+                                      `${Sumerpur.oee}` > `${Sumerpur.targetValue}`
+                                        ? "#0b723b"
+                                        : "#ff0000",
+                                  },
+                                ],
+                              },
+                            ],
+                          });
 
-                    })
-                }).catch((err)=>{
+                      })
+                  }else{
                     current.setState({not_Achieved:0});
                     current.setState({_achieved:0});
                     current.setState({
@@ -217,9 +245,48 @@ export class Dashboard3 extends Component {
                           },
                         ],
                       });
-                console.log("--err-");
-                console.log(err)
+                  }
+                }).catch((err)=>{
+                    console.log("--err-");
+                    console.log(err)
+                    current.setState({not_Achieved:0});
+                    current.setState({_achieved:0});
+                    current.setState({
+                        series: [
+                          {
+                            name: "OEE",
+                            data: [
+                              {
+                                x: "",
+                                y: 0,
+                                fillColor: "#ff0000",
+                              },
+                              {
+                                x: "",
+                                y: 0,
+                                fillColor: "#ff0000",
+                              },
+                              {
+                                x: "",
+                                y: 0,
+                                fillColor: "#ff0000",
+                              },
+                              {
+                                x: "",
+                                y: 0,
+                                fillColor: "#ff0000",
+                              },
+                              {
+                                x: "",
+                                y: 0,
+                                fillColor: "#ff0000",
+                              },
+                            ],
+                          },
+                        ],
+                      });
                 });
+
       }
 
       changeReport=(e)=>{

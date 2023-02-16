@@ -201,6 +201,7 @@ export class Dashboard2 extends Component {
       getFlowChartData=()=>{
         console.clear();
         var fullNumber;
+        var dataFormateType;
         var product_name=[];
         var product_value=[];
         var product_color=[];
@@ -218,6 +219,8 @@ export class Dashboard2 extends Component {
           Accept: "application/json",
             "Content-Type": "application/json",
               };
+
+
           axios.get(`${apiUrl}/nmbapi/GetProdComplianceDataForAllFactory?duration=${this.state.type}&startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}` , {
                 headers: passHeader,
           }).then((response) =>{
