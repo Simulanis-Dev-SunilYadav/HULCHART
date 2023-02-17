@@ -222,8 +222,6 @@ export class Dashboard2 extends Component {
           axios.get(`${apiUrl}/nmbapi/GetProdComplianceDataForAllFactory?duration=${this.state.type}&startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}` , {
                 headers: passHeader,
           }).then((response) =>{
-            // console.log("response")
-            // console.log(response)
               current.setState({
                 grafChart:response.data
               },function(){
@@ -297,7 +295,7 @@ export class Dashboard2 extends Component {
                     product_value.push(Number(e.prodComplianceVal));
                     product_color.push(Number(e.prodComplianceVal)>= 95 ? '#0b723b' : '#dc0000' )
                 });
-               console.log("response.data")
+                console.log("response.data")
                 console.log(response.data.sKUs)
                 current.setState({
                   series1:[{
@@ -311,12 +309,8 @@ export class Dashboard2 extends Component {
                   }
                   });
             
-            });
+              });
 
-
-
-
-    
           }).catch((err)=>{
                     console.log("--err-");
                     console.log(err);
@@ -381,6 +375,14 @@ export class Dashboard2 extends Component {
   render() {
     return (
         <>
+        {/* <div className="preloader" id ="showHide">
+          <div class="ui-loader loader-blk">
+            <svg viewBox="22 22 44 44" class="multiColor-loader">
+                <circle cx="44" cy="44" r="20.2" fill="none" stroke-width="3.6" class="loader-circle loader-circle-animation"></circle>
+            </svg>
+          </div>
+        </div> */}
+
         <section className="dashboard1">
         <div className="dashheader">
                 <div className="container">
@@ -445,7 +447,6 @@ export class Dashboard2 extends Component {
                     <div className="col-md-12 mt-4">
                         <div className="card">
                             <div className="card-body">
-                                {/* <PdataComp/> */}
                             
                             <div id="chart">
                             <Chart options={this.state.options1} series={this.state.series1} type="bar" height={380} width={1200} />

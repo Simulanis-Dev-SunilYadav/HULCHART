@@ -10,8 +10,9 @@ export class Dashboard7 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          type:"weekly",  // "daily", "weekly", "monthly", "yearly"
+          type:"daily",  // "daily", "weekly", "monthly", "yearly"
           data:null,
+          selectOption:5,
           percent:null,
           series: [
             {
@@ -88,15 +89,15 @@ export class Dashboard7 extends Component {
     
 
         if(current.state.type == "daily"){
-          dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+          dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
         }else if(current.state.type == "weekly"){
             const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
             let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
-            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?startDate=${formattedWeekDate}&endDate=${formattedYesterdayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
         }else if(current.state.type == "monthly"){
-            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?factoryId=5&duration=monthly`
+            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?factoryId=${this.state.selectOption}&duration=monthly`
       }else if(current.state.type == "yearly"){
-            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?factoryId=5&duration=yearly`
+            dataFormateType = `${apiUrl}/nmbapi/GetSiteWiseRMDosingAccuracy?factoryId=${this.state.selectOption}&duration=yearly`
       }
         const passHeader = {
         Authorization: token,
@@ -203,6 +204,15 @@ export class Dashboard7 extends Component {
         })
       }
 
+      selectFactory=(e)=>{
+        let current = this;
+        current.setState({
+            selectOption: Number(e.target.value)
+        })
+         setTimeout(()=>{
+            this.getFlowChartData()
+         },250)
+      }
 
 
   render() {
@@ -219,10 +229,10 @@ export class Dashboard7 extends Component {
                         <div className="col-md-4">
                             <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
+                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
+                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" data-bs-toggle="pill" data-bs-target="#mtd" type="button" role="tab" aria-controls="pills-contact" onClick={()=>this.changeReport("monthly")} aria-selected="false">MTD</button>
@@ -233,7 +243,14 @@ export class Dashboard7 extends Component {
                             </ul>
                         </div>
                         <div className="col-md-4">
-                            {/* <DateRangePicker /> */}
+                            <label for="cars" >select a factory:</label>
+                                <select name="location" id="location" onChange={this.selectFactory}>
+                                        <option value="3">Chhindwara</option>
+                                        <option value="1">Dapada</option>
+                                        <option value="4">Haridwar</option>
+                                        <option value="2">Pondicherry</option>
+                                        <option value="5" selected="selected">Sumerpur</option>
+                                </select>
                         </div>
                     </div>
                 </div>
