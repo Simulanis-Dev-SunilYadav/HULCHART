@@ -110,7 +110,7 @@ export class Dashboard3 extends Component {
 
 
             if(current.state.type == "daily"){
-               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
+               dataFormateType = `${apiUrl}/nmbapi/GetOEEDashboard?startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}&factoryId=5&duration=${this.state.type}`
             }else if(current.state.type == "weekly"){
                const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
                let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();

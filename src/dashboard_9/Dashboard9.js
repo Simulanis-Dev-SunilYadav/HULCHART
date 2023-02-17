@@ -15,31 +15,6 @@ export class Dashboard9 extends Component {
             topFiveLosses:[],
             chartGraph:[],
             DonutChart:[],
-            factoryName:''
-            // label1:'',
-            // value1:'',
-            // color1:[],
-            // value11:'',
-
-            // label2:'',
-            // value2:'',
-            // color2:[],
-            // value22:'',
-
-            // label3:'',
-            // value3:'',
-            // color3:[],
-            // value33:'',
-
-            // label4:'',
-            // value4:'',
-            // color4:[],
-            // value44:'',
-
-            // label5:'',
-            // value5:'',
-            // color5:[],
-            // value55:'',
         }
         }
 
@@ -81,32 +56,7 @@ export class Dashboard9 extends Component {
               axios.get(`${dataFormateType}` , {
                 headers: passHeader,
                 }).then((response) =>{
-                    console.clear();
-                    // console.log("response.data.oeeLines[0]")
-                    // console.log(response)
-                    // const factoryName = response.data.oeeLines[0];
-                    // console.log(factoryName.factoryName)
-                    current.setState({factoryName: response.data.oeeLines[0].factoryName})
-                    // console.log("dashboard 9")
-                    // var reA = /[^a-zA-Z]/g;
-                    // var reN = /[^0-9]/g;
-                    // let tt = response.data.oeeLines[0].lines.sort((a, b) => {
-                    //     // var aA = a.replace(reA, "");
-                    //     // var bA = b.replace(reA, "");
-                    //     // if (aA === bA) {
-                    //     //     var aN = parseInt(a.replace(reN, ""), 10);
-                    //     //     var bN = parseInt(b.replace(reN, ""), 10);
-                    //     //     return aN === bN ? 0 : aN > bN ? 1 : -1;
-                    //     //   } else {
-                    //     //     return aA > bA ? 1 : -1;
-                    //     //   }
-                    //      if (a.lineName < b.lineName) return -1;
-                    //      if (a.lineName > b.lineName) return 1;
-                    //      return 0;
-                    //     });
-                        
-                    // console.log(tt)
-
+      current.setState({factoryName: response.data.oeeLines[0].factoryName})
                     const alphaNumericSort = (arr = []) => {
                         const sorter = (a, b) => {
                            const isNumber = (v) => (+v).toString() === v;
@@ -155,8 +105,6 @@ export class Dashboard9 extends Component {
 
       selectFactory=(e)=>{
         let current = this;
-        console.log("hit");
-        console.log(e.target.value);
         current.setState({
             selectOption: Number(e.target.value)
         })
