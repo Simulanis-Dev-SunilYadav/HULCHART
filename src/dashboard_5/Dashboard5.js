@@ -10,7 +10,8 @@ import GapToTarget from './GapToTarget'
 function dashboard5() {
   return (
     <>
-        <section className="dashboard3">
+    <iframe title="Day 0_NMB" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=373e7ff9-e4f3-40d0-86d1-350cc1e8032f&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe>
+        {/* <section className="dashboard3">
             <div className="container">
                 <div className="row">
                     <div className="col-md-3">
@@ -70,7 +71,7 @@ function dashboard5() {
                     </div>
                 </div>
             </div>
-        </section>
+        </section> */}
     </>
   )
 }

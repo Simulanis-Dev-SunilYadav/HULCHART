@@ -8,7 +8,7 @@ export class Dashboard9 extends Component {
         super(props);
         this.state = {
             selectOption:5,
-            type:"daily",  // "daily", "weekly", "monthly", "yearly"
+            type:"weekly",  // "daily", "weekly", "monthly", "yearly"
             graph1:null,
             topFiveLosses:[],
             chartGraph:[],
@@ -172,10 +172,10 @@ export class Dashboard9 extends Component {
                         <div className="col-md-4">
                             <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
+                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
+                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" data-bs-toggle="pill" data-bs-target="#mtd" type="button" role="tab" aria-controls="pills-contact" onClick={()=>this.changeReport("monthly")} aria-selected="false">MTD</button>
