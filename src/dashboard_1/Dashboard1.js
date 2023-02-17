@@ -7,8 +7,8 @@ import CLDByBranch from './CLDByBranch'
 function dashboard1() {
   return (
     <>
-       <section className="dashboard0">
-            <div className="container">
+       {/* <section className="dashboard0"> */}
+            {/* <div className="container">
                 <div className="row">
                     <div className="col-md-7">
                         <Analysis />
@@ -40,8 +40,10 @@ function dashboard1() {
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </div> */}
+
+            <iframe title="PBI Quality" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=8b457fd5-6ae8-4f9a-b22d-9401fa2b982a&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe>
+        {/* </section> */}
        
     </>
   )
