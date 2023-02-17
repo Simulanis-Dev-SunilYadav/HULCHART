@@ -6,7 +6,7 @@ h3{
     font-weight: 600 !important;
 }
 .dashboard {
-    padding: 40px 0px;
+    padding: 0px 0px 40px;
     background: #f5f5f5;
 }
 .doughnt{
@@ -217,7 +217,7 @@ p.kpffre1 {
   padding: 40px 0px;
 }
 .dashboard7{
-  padding: 40px 0px;
+  padding: 0px 0px 40px;
 }
 
 .nav-pills {
@@ -337,6 +337,7 @@ path.donutchart-arcs-path.selected {
     background: #01a9e0 !important;
 }
 
+
 /* //codelessly loader style */
 
 
@@ -431,4 +432,27 @@ z-index: 9999;
 
 .showHide{
   display: none;
+}
+
+a.canvasjs-chart-credit {
+    display: none !important;
+}
+fieldset{
+  border: inherit !important;
+}
+.sfsctory{
+  position: relative;
+}
+
+.sfsctory .form-control{
+   height: 40px;
+}
+.sfsctory label {
+    position: absolute;
+    top: -8px;
+    left: 9px;
+    background: #fff;
+    color: #8a8a8a;
+    padding: 0px 7px;
+    font-size: 11px;
 }

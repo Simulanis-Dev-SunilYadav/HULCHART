@@ -6,150 +6,89 @@ import Chart from 'react-apexcharts'
 
 export class Dashboard10 extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            type:"daily",  // "daily", "weekly", "monthly", "yearly"
-            graph1:null,
+       constructor(props) {
+          super(props);
+          this.state = {
             series: [{
-                data: [400, 430, 448]
-              }],
+              data: [400, 430, 448,]
+            }],
             options: {
-                colors:['#bb0000'],  
-                chart: {
-                  type: 'bar',
-                  height: 350,
-                  toolbar: {
-                     show: false
-                  },
-                },
-                plotOptions: {
-                  bar: {
-                    borderRadius: 4,
-                    horizontal: true,
-                    opacity:1
-                  }
-                },
-                dataLabels: {
-                  enabled: false
-                },
-                grid:{
+              chart: {
+                type: 'bar',
+                height: 380,
+                toolbar:{
                   show:false
                 },
-                xaxis: {
-                  categories: ['SKU_200', 'SKU_250', 'SKU_80',
-                  ],
+              },
+              legend:{
+                show:false
+              },
+              plotOptions: {
+                bar: {
+                  barHeight: '100%',
+                  distributed: true,
+                  horizontal: true,
+                  dataLabels: {
+                    position: 'bottom'
+                  },
                 }
               },
-        }
-    }
-
-
-    componentDidMount(){
-        this.getFlowChartData();    
-       }
-
-
-       getFlowChartData=async()=>{
-        let current = this;
-        console.clear();
-        var fullNumber;
-        var dataFormateType;
-        var product_name=[];
-        var product_value=[];
-        var product_color=[];
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        let mm = today.getMonth() + 1;
-        let dd = today.getDate();
-       const formattedTodayDate = mm + '/' + dd + '/' + yyyy;
-       var yesterday = new Date(today.getTime() - 24*60*60*1000);
-       var threeYesterday = new Date(today.getTime() - 4*24*60*60*1000);
-       const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
-       const threeFormattedYesterdayDate = threeYesterday.getMonth() + 1 + '/' + threeYesterday.getDate() + '/' + threeYesterday.getFullYear();
-     
-
-
-        const passHeader = {
-            Authorization: token,
-            Accept: "application/json",
-              "Content-Type": "application/json",
-                };
-
-        
-                if(current.state.type == "daily"){
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
-                }else if(current.state.type == "weekly"){
-                    const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
-                    let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
-                        dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&factoryId=5&duration=${this.state.type}`
-                }else if(current.state.type == "monthly"){
-                        dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=5&duration=monthly`
-                }else if(current.state.type == "yearly"){
-                        dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?factoryId=5&duration=yearly`
+              colors: ['#dc0000', '#0b723b', '#0b723b',
+              ],
+              dataLabels: {
+                enabled: true,
+                textAnchor: 'start',
+                style: {
+                  colors: ['#000']
+                },
+                formatter: function (val, opt) {
+                  return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
+                },
+                offsetX: -200,
+                dropShadow: {
+                  enabled: false
                 }
-
-                axios.get(`${dataFormateType}` , {
-                    headers: passHeader,
-                    }).then((response) =>{
-                        console.log("dashboard 10")
-                        console.log(response.data.skuWiseOEEList)
-                // var product_name=[];
-                // var product_value=[];
-                        response.data.skuWiseOEEList.map((e)=>{
-                           product_name.push(e.skuName)
-                           product_value.push(e.skuoee)
-                        })
-
-                        current.setState({
-                          series: [{
-                            data: product_value
-                          }],
-                          options: {
-                            colors:['#bb0000'],  
-                            chart: {
-                              type: 'bar',
-                              height: 350,
-                              toolbar: {
-                                 show: false
-                              },
-                            },
-                            plotOptions: {
-                              bar: {
-                                borderRadius: 4,
-                                horizontal: true,
-                                opacity:1
-                              }
-                            },
-                            dataLabels: {
-                              enabled: false
-                            },
-                            grid:{
-                              show:false
-                            },
-                            xaxis: {
-                              categories: product_name,
-                            }
-                          },
-                        })
-
-
-                    }).catch((error) =>{
-                        console.log("error")
-                        console.log(error)
-                    })
-
-       }
-
-       changeReport=(e)=>{
-        let current = this;
-        current.setState({
-            type:e
-        },()=>{
-            this.getFlowChartData(); 
-        })
-      }
-
+              },
+              stroke: {
+                width: 1,
+                colors: ['#fff']
+              },
+              xaxis: {
+                categories: ['South Korea', 'Canada', 'India'],
+                colors:'#000',
+              },
+              yaxis: {
+                labels: {
+                  show: true
+                }
+              },
+              title: {
+                  // text: 'Custom DataLabels',
+                  align: 'center',
+                  floating: true
+              },
+              subtitle: {
+                  // text: 'Category Names as DataLabels inside bars',
+                  align: 'center',
+              },
+              tooltip: {
+                theme: 'dark',
+                x: {
+                  show: true
+                },
+                y: {
+                  title: {
+                    formatter: function () {
+                      return ''
+                    }
+                  }
+                }
+              }
+            },
+          
+          
+          };
+        }
 
   render() {
     return (

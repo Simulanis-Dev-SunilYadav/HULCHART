@@ -3,12 +3,14 @@ import DonutChart from 'react-donut-chart';
 import axios from "axios";
 import { token,apiUrl } from "../config"
 
+
+
 export class Dashboard9 extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selectOption:5,
-            type:"weekly",  // "daily", "weekly", "monthly", "yearly"
+            type:"daily",  // "daily", "weekly", "monthly", "yearly"
             graph1:null,
             topFiveLosses:[],
             chartGraph:[],
@@ -54,7 +56,7 @@ export class Dashboard9 extends Component {
               axios.get(`${dataFormateType}` , {
                 headers: passHeader,
                 }).then((response) =>{
-                     
+      current.setState({factoryName: response.data.oeeLines[0].factoryName})
                     const alphaNumericSort = (arr = []) => {
                         const sorter = (a, b) => {
                            const isNumber = (v) => (+v).toString() === v;
@@ -126,10 +128,10 @@ export class Dashboard9 extends Component {
                         <div className="col-md-4">
                             <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
+                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
+                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" data-bs-toggle="pill" data-bs-target="#mtd" type="button" role="tab" aria-controls="pills-contact" onClick={()=>this.changeReport("monthly")} aria-selected="false">MTD</button>
@@ -140,14 +142,16 @@ export class Dashboard9 extends Component {
                             </ul>
                         </div>
                         <div className="col-md-4">
-                            <label for="cars" >select a factory:</label>
-                                <select name="location" id="location" onChange={this.selectFactory}>
-                                        <option value="3">Chhindwara</option>
-                                        <option value="1">Dapada</option>
-                                        <option value="4">Haridwar</option>
-                                        <option value="2">Pondicherry</option>
-                                        <option value="5" selected="selected">Sumerpur</option>
+                            <div className='sfsctory'>
+                                <label for="cars" >select a factory</label>
+                                <select name="location" id="location" className='form-control' onChange={this.selectFactory}>
+                                    <option value="3">Chhindwara</option>
+                                    <option value="1">Dapada</option>
+                                    <option value="4">Haridwar</option>
+                                    <option value="2">Pondicherry</option>
+                                    <option value="5" selected="selected">Sumerpur</option>
                                 </select>
+                            </div>
                         </div>
 
                     </div>
@@ -159,7 +163,7 @@ export class Dashboard9 extends Component {
                     <div className="card-body">
                         <div className="row">
                             <div className="col-md-4">
-                                <h2>LINE WISE OEE - SUMERPUR</h2>
+                                <h2>LINE WISE OEE - {this.state.factoryName} </h2>
                             </div>
                             <div className="col-md-5">
                             </div>
@@ -167,7 +171,7 @@ export class Dashboard9 extends Component {
                             </div>
                         </div>
 
-                        <h5>Factory - SUMERPUR</h5>
+                        <h5>Factory - {this.state.factoryName}</h5>
                         <div className="tab-content" id="pills-tabContent">
                             <br />
                             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -176,7 +180,7 @@ export class Dashboard9 extends Component {
                                 <div className="card">
                                     <div className="card-body">
                                         <div className="lwisesbox">
-                                            <h3 className='text-center'>SUMERPUR</h3>
+                                            <h3 className='text-center'>{this.state.factoryName}</h3>
                                           <DonutChart
                                             data={[
                                                 {
