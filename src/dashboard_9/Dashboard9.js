@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import DonutChart from 'react-donut-chart';
 import axios from "axios";
-import { token,apiUrl } from "../config"
+import { getToken,apiUrl } from "../config"
 
 
 
@@ -10,8 +10,9 @@ export class Dashboard9 extends Component {
         super(props);
         this.state = {
             selectOption:5,
-            type:"daily",  // "daily", "weekly", "monthly", "yearly"
+            type:"weekly",  // "daily", "weekly", "monthly", "yearly"
             graph1:null,
+            factoryName:"",
             topFiveLosses:[],
             chartGraph:[],
             DonutChart:[],
@@ -24,8 +25,8 @@ export class Dashboard9 extends Component {
        }
 
       getFlowChartData=async()=>{
-        console.clear();
-
+        // console.clear();
+        var token = await getToken();
         let current = this;
         var dataFormateType;
         const today = new Date();
@@ -33,6 +34,9 @@ export class Dashboard9 extends Component {
         let mm = today.getMonth() + 1;
         let dd = today.getDate();
        const formattedTodayDate = mm + '/' + dd + '/' + yyyy;
+       var yesterday = new Date(today.getTime() - 24*60*60*1000);
+       const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
+    
 
        const weekStartDate = new Date(new Date(new Date()).setDate(new Date().getDate() - new Date().getDay() + 0));
        let formattedWeekDate = weekStartDate.getMonth() + 1 + '/' + weekStartDate.getDate() + '/' +weekStartDate.getFullYear();
@@ -44,7 +48,7 @@ export class Dashboard9 extends Component {
               };
 
               if(current.state.type == "daily"){
-                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedTodayDate}&endDate=${formattedTodayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
+                    dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedYesterdayDate}&endDate=${formattedYesterdayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
               }else if(current.state.type == "weekly"){
                     dataFormateType = `${apiUrl}/nmbapi/GetLineOEE?startDate=${formattedWeekDate}&endDate=${formattedTodayDate}&factoryId=${this.state.selectOption}&duration=${this.state.type}`
               }else if(current.state.type == "monthly"){
@@ -56,7 +60,7 @@ export class Dashboard9 extends Component {
               axios.get(`${dataFormateType}` , {
                 headers: passHeader,
                 }).then((response) =>{
-      current.setState({factoryName: response.data.oeeLines[0].factoryName})
+                    current.setState({factoryName: response.data.oeeLines[0].factoryName})
                     const alphaNumericSort = (arr = []) => {
                         const sorter = (a, b) => {
                            const isNumber = (v) => (+v).toString() === v;
@@ -74,6 +78,10 @@ export class Dashboard9 extends Component {
                            arr.sort(sorter);
                      };
                      alphaNumericSort(response.data.oeeLines[0].lines);
+                     
+                     console.log("----response.data.oeeLines[0].lines")
+                     console.log(response.data.oeeLines[0].lines[1])
+                     console.log(Number(`${response.data.oeeLines[0].lines[1].oee}`) >= Number(100) ? Number(100) : Number(100)-Number(`${response.data.oeeLines[0].lines[1].oee}`))
 
                     current.setState({
                         chartGraph : response.data.oeeLines[0].lines
@@ -123,15 +131,15 @@ export class Dashboard9 extends Component {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-4">
-                            <h3>Production Compliance</h3>
+                            <h2>Factory Wise OEE</h2>
                         </div>
                         <div className="col-md-4">
                             <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
+                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="pills-home" onClick={()=>this.changeReport("daily")} aria-selected="true">Daily</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
+                                    <button className="nav-link active" data-bs-toggle="pill" data-bs-target="#wtd" type="button" role="tab" aria-controls="pills-profile" onClick={()=>this.changeReport("weekly")} aria-selected="false">WTD</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link" data-bs-toggle="pill" data-bs-target="#mtd" type="button" role="tab" aria-controls="pills-contact" onClick={()=>this.changeReport("monthly")} aria-selected="false">MTD</button>
@@ -226,7 +234,8 @@ export class Dashboard9 extends Component {
                                                     },
                                                     {
                                                         label: '',
-                                                        value: 100-Number(`${list.oee}`),
+                                                        // value: Number(100) - Number(`${list.oee}`),
+                                                        value: Number(`${list.oee}`) >= 100 ? 0 : 100-Number(`${list.oee}`),
                                                     },
                                                 ]}
                                                 width={170}

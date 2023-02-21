@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import Doughnut from './Doughnut'
-import ColumnOEE from './ColumnOEE'
 import axios from "axios";
 import Chart from "react-apexcharts";
-import { token, apiUrl } from "../config"
+import { getToken, apiUrl } from "../config"
 import DonutChart from 'react-donut-chart';
 
 export class Dashboard3 extends Component {
@@ -94,7 +92,8 @@ export class Dashboard3 extends Component {
         this.getFlowChartData();  
       }
 
-      getFlowChartData=()=>{
+      getFlowChartData=async()=>{
+        var token = await getToken();
             let current = this;
             var dataFormateType;
 
@@ -131,7 +130,7 @@ export class Dashboard3 extends Component {
         axios.get(`${dataFormateType}` , {
                     headers: passHeader,
                 }).then((response) =>{
-                  console.clear();
+                  // console.clear();
                   console.log("dashboard 3")
                   console.log(response)
                   console.log(response.data.factories.length == 0)
@@ -249,42 +248,6 @@ export class Dashboard3 extends Component {
                 }).catch((err)=>{
                     console.log("--err-");
                     console.log(err)
-                    current.setState({not_Achieved:0});
-                    current.setState({_achieved:0});
-                    current.setState({
-                        series: [
-                          {
-                            name: "OEE",
-                            data: [
-                              {
-                                x: "",
-                                y: 0,
-                                fillColor: "#ff0000",
-                              },
-                              {
-                                x: "",
-                                y: 0,
-                                fillColor: "#ff0000",
-                              },
-                              {
-                                x: "",
-                                y: 0,
-                                fillColor: "#ff0000",
-                              },
-                              {
-                                x: "",
-                                y: 0,
-                                fillColor: "#ff0000",
-                              },
-                              {
-                                x: "",
-                                y: 0,
-                                fillColor: "#ff0000",
-                              },
-                            ],
-                          },
-                        ],
-                      });
                 });
 
       }
@@ -312,7 +275,7 @@ export class Dashboard3 extends Component {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-4">
-                            <h3>Production Compliance</h3>
+                            <h3>Factory Wise OEE</h3>
                         </div>
                         <div className="col-md-4">
                             <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
@@ -343,21 +306,21 @@ export class Dashboard3 extends Component {
                          <h3>Factory wise OEE</h3>
                      </div>
                      <div className="col-md-4">
-                         <select className='form-control'>
+                         {/* <select className='form-control'>
                              <option value="0">Select a factory</option>
                              <option value="0">Dapada</option>
                              <option value="0">Haridwar</option>
                              <option value="0">Pondicherry</option>
                              <option value="0">Sumerpur</option>
-                         </select>
+                         </select> */}
                      </div>
                  </div>
  
                  <div className="row mt-4">
+                  
                      <div className="col-md-4">
                          <div className="card">
                              <div className='card-body doughnt'>
-                                 {/* <Doughnut/> */}
                                  <DonutChart
                                 data={[
                                     {
@@ -386,7 +349,6 @@ export class Dashboard3 extends Component {
                      <div className="col-md-8">
                          <div className="card">
                              <div className="card-body">
-                                 {/* <ColumnOEE/> */}
                                  <div id="chart">
                             <Chart
                                 options={this.state.options}
@@ -406,6 +368,7 @@ export class Dashboard3 extends Component {
                              </div>
                          </div>
                      </div>
+
                  </div>
             </div>
 

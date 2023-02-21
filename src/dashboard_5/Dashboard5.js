@@ -6,11 +6,16 @@ import T5DepotDPMU from './T5DepotDPMU'
 import UnitFactory from './UnitFactory'
 import DepotLocationInspected from './DepotLocationInspected'
 import GapToTarget from './GapToTarget'
+import Dashboard2 from "../image/dashboard2.png"
+
 
 function dashboard5() {
   return (
     <>
-    <iframe title="Day 0_NMB" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=373e7ff9-e4f3-40d0-86d1-350cc1e8032f&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe>
+           <div>
+              <img src={Dashboard2} style={{width: '100%'}} />
+           </div>
+    {/* <iframe title="Day 0_NMB" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=373e7ff9-e4f3-40d0-86d1-350cc1e8032f&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe> */}
         {/* <section className="dashboard3">
             <div className="container">
                 <div className="row">

@@ -52,7 +52,7 @@ export class Dashboard10 extends Component {
 
        getFlowChartData=async()=>{
         let current = this;
-        console.clear();
+        // console.clear();
         var fullNumber;
         var dataFormateType;
         var product_name=[];

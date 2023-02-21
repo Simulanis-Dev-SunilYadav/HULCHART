@@ -9,7 +9,7 @@ export class Cp extends Component {
           this.state = {
             series: [44, 55, 13],
             options: {
-              colors: ['#d50707', '#f4ca16', '#0b723b'],
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
               chart: {
                 width: 380,
                 type: 'pie',

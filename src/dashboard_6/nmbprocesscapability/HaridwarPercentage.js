@@ -19,7 +19,7 @@ export class Dapda extends Component {
               data: []
             }],
             options: {
-              colors: ['#d50707', '#f4ca16', '#0b723b'],
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
               chart: {
                 toolbar: {
                     show: false,
@@ -83,7 +83,7 @@ export class Dapda extends Component {
                 axios.get(`${apiUrl}/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                   headers: passHeader,
                   }).then((response) =>{
-                    console.clear();
+                    // console.clear();
                     console.log("-----pondchery response")
                     console.log(response.data);
                     let pondicherryData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Haridwar")

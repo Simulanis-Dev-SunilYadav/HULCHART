@@ -3,7 +3,7 @@ import Analysis from './analysis'
 import LineDotted from './dottedline'
 import CLDByCustomer from './CLDByCustomer'
 import CLDByBranch from './CLDByBranch'
-
+import Dashboard1 from "../image/dashboard1.png"
 function dashboard1() {
   return (
     <>
@@ -42,9 +42,18 @@ function dashboard1() {
                 </div>
             </div> */}
 
-            <iframe title="PBI Quality" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=8b457fd5-6ae8-4f9a-b22d-9401fa2b982a&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe>
+
+           <div>
+              <img src={Dashboard1} style={{width: '100%'}} />
+           </div>
+
+
+            {/* <iframe title="PBI Quality" style={{width: '100%', height: '100vh'}} src="https://app.powerbi.com/reportEmbed?reportId=8b457fd5-6ae8-4f9a-b22d-9401fa2b982a&autoAuth=true&ctid=f66fae02-5d36-495b-bfe0-78a6ff9f8e6e" frameborder="0" allowFullScreen="true"></iframe> */}
         {/* </section> */}
        
+
+
+
     </>
   )
 }

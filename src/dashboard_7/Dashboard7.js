@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import DosingAccuracyP from './SCLFdosingaccuracy/DosingAccuracyP'
-import RmTargetVactual from './SCLFdosingaccuracy/RmTargetVactual'
 import GaugeChart from 'react-gauge-chart'
 import axios from "axios";
 import Chart from "react-apexcharts";
-import { token,apiUrl } from "../config"
+import { getToken,apiUrl } from "../config"
 
 export class Dashboard7 extends Component {
     constructor(props) {
         super(props);
         this.state = {
           type:"daily",  // "daily", "weekly", "monthly", "yearly"
+          dataFound:"",
           data:null,
           selectOption:5,
           percent:null,
@@ -65,12 +64,15 @@ export class Dashboard7 extends Component {
       }
 
       componentDidMount(){
+        let current = this;
+        current.setState({dataFound:""});
         this.getFlowChartData();  
       }
 
 
 
-      getFlowChartData=()=>{
+      getFlowChartData=async()=>{
+        var token = await getToken();
         let current = this;
         var fullNumber;
         var dataFormateType;
@@ -107,13 +109,16 @@ export class Dashboard7 extends Component {
         axios.get(`${dataFormateType}` , {
               headers: passHeader,
         }).then((response) =>{
-            console.log("====response")
-            console.log(response)
+            console.log("====dashboard 7")
+            console.log(response);
+
+         if(response?.data?.siteWiseOverallNMBValue){
+           current.setState({dataFound:""});
             current.setState({
               data:response.data.siteWiseOverallNMBValue
             }, function () {
                 var graphValue = current.state.data.toString();
-                console.clear();
+                // console.clear();
                 let dotINdex = graphValue.indexOf(".");
                 if(dotINdex >= 2){
                     let removeDot = graphValue.toString().replaceAll(".",'');
@@ -186,11 +191,13 @@ export class Dashboard7 extends Component {
                 });
 
             });
-    
-          }).catch((err)=>{
-            console.log("--err-");
-            console.log(err);
-            // current.setState({percent:0})
+          }else{
+            current.setState({dataFound:"No data found"})
+          }
+          
+        }).catch((err)=>{
+          console.log("--err-");
+          console.log(err);
           });
       }
 
@@ -257,12 +264,13 @@ export class Dashboard7 extends Component {
             </div>
 
              <div className="container">
+              {this.state.dataFound == "" ?
+               
                 <div className="row">
                     <div className="col-md-5">
                         <div className="card">
                             <div className="card-body" style={{height:'375px'}}>
                                 <h3 className='mt-2 mb-5'>Dosing Accuracy %</h3>
-                                {/* <DosingAccuracyP/> */}
                                 <GaugeChart 
                                     id="gauge-chart2" 
                                     colors={["red", "#f5cd19", 'green']}
@@ -279,7 +287,6 @@ export class Dashboard7 extends Component {
                         <div className="card">
                             <div className="card-body">
                                 <h3>RM Target Vs Actual </h3>
-                                {/* <RmTargetVactual/> */}
                                 <Chart 
                                 options={this.state.options}
                                 series={this.state.series} 
@@ -290,6 +297,9 @@ export class Dashboard7 extends Component {
                         </div>
                     </div>
                 </div>
+                :
+               <h2>{this.state.dataFound}</h2>
+             }          
              </div>
          </section>
       </>

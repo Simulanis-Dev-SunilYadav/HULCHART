@@ -9,7 +9,7 @@ export class Cpk extends Component {
           this.state = {
             series: [],
             options: {
-              colors: ['#d50707', '#f4ca16', '#0b723b'],
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
               chart: {
                 width: 380,
                 type: 'pie',

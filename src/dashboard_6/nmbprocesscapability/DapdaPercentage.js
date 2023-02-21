@@ -19,7 +19,7 @@ export class Dapda extends Component {
               data: []
             }],
             options: {
-              colors: ['#d50707', '#f4ca16', '#0b723b'],
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
               chart: {
                 toolbar: {
                     show: false,
@@ -63,6 +63,61 @@ export class Dapda extends Component {
                 show:false
               }
             },
+            series1: [{
+              name: '',
+              data: []
+            }, {
+              name: '',
+              data: []
+            }, {
+              name: '',
+              data: []
+            }],
+            options1: {
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
+              chart: {
+                toolbar: {
+                    show: false,
+                },
+                type: 'bar',
+                height: 120,
+                stacked: true,
+                stackType: '100%'
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                },
+              },
+              stroke: {
+                width: 0,
+                colors: ['#fff']
+              },
+            //   title: {
+            //     text: 'KPP',
+            //     position: 'left',
+            //   },
+              xaxis: {
+                categories: ['CP', 'CPK'],
+              },
+              tooltip: {
+                y: {
+                  formatter: function (val) {
+                    return val
+                  }
+                }
+              },
+              fill: {
+                opacity: 1
+              
+              },
+              legend: {
+                position: 'left',
+                horizontalAlign: 'left',
+                offsetX: 40,
+                show:false
+              }
+            },
           };
         }
 
@@ -83,11 +138,12 @@ export class Dapda extends Component {
                 axios.get(`${apiUrl}/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                   headers: passHeader,
                   }).then((response) =>{
-                    console.clear();
-                   
+                    // // console.clear();
                     let dapadaData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Dapada")
                     let dapdaDataValue = dapadaData.factoryKPP.factoryKppCpValue;
                     let dapdaDataValue2 = dapadaData.factoryKPP.factoryKppCpkValue;
+                    console.log("---111111111dapdaDataValue")
+                    console.log(dapdaDataValue)
                    
                      let amber={
                       name:'',
@@ -121,7 +177,7 @@ export class Dapda extends Component {
                 <Chart options={this.state.options} series={this.state.series} type="bar" height={150} />
             </div>
             <hr className='hr' />
-            <KBBDapada/>
+              <KBBDapada/>
          </div>
        </div>
       </>

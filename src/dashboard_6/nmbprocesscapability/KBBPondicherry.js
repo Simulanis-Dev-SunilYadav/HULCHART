@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from 'react-apexcharts'
-import { token } from "../../config"
+import { token,apiUrl } from "../../config"
 import axios from "axios";
 export class KBBDapada extends Component {
         constructor(props) {
@@ -19,7 +19,7 @@ export class KBBDapada extends Component {
               data: []
             }],
             options: {
-              colors: ['#d50707', '#f4ca16', '#0b723b'],
+              colors: ['#a9a9a9', '#f4ca16', '#0b723b'],
               chart: {
                 toolbar: {
                     show: false,
@@ -80,7 +80,7 @@ export class KBBDapada extends Component {
           Accept: "application/json",
             "Content-Type": "application/json",
               };
-              axios.get(`https://bnlwe-gs-d-57321-apimgt.azure-api.net/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
+              axios.get(`${apiUrl}/nmbapi/GetKPPKBP?date=${formattedTodayDate}` , {
                 headers: passHeader,
                 }).then((response) =>{
                   let pondicherryData = response.data.kBPKPPFactoryList.find(item=>item.factoryName == "Pondicherry")

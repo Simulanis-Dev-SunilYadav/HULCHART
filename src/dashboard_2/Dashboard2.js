@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import PCompByFactories from './PCompByFactories'
-import NMBProductionCompilance from './NMBProductionCompilance'
-import PdataComp from './PdataComp'
 import GaugeChart from 'react-gauge-chart'
 import axios from "axios";
 import Chart from "react-apexcharts";
-import { token,apiUrl } from "../config"
+import { apiUrl, getToken } from "../config"
 
 
 export class Dashboard2 extends Component {
@@ -193,11 +190,15 @@ export class Dashboard2 extends Component {
       }
     
       componentDidMount(){
-        this.getFlowChartData();    
+        this.getFlowChartData();  
        }
 
-      getFlowChartData=()=>{
+      getFlowChartData=async ()=>{
         console.clear();
+        var token = await getToken();
+        console.log("__token");
+        console.log(token);
+        let current = this;
         var fullNumber;
         var dataFormateType;
         var product_name=[];
@@ -211,7 +212,6 @@ export class Dashboard2 extends Component {
        var yesterday = new Date(today.getTime() - 24*60*60*1000);
        const formattedYesterdayDate = yesterday.getMonth() + 1 + '/' + yesterday.getDate() + '/' + yesterday.getFullYear();
     
-        let current = this;
         const passHeader = {
           Authorization: token,
           Accept: "application/json",
@@ -314,52 +314,6 @@ export class Dashboard2 extends Component {
           }).catch((err)=>{
                     console.log("--err-");
                     console.log(err);
-                     current.setState({
-                    series: [
-                    {
-                    name: '',
-                    data: [
-                            {
-                            x: '',
-                            y: 0,
-                            fillColor: '#fa0505'
-                            },
-                            {
-                              x: '',
-                              y: 0,
-                              fillColor: '#fa0505'
-                            },
-                            {
-                              x: '',
-                              y: 0,
-                              fillColor: '#fa0505'
-                            },
-                            {
-                              x: '',
-                              y: 0,
-                              fillColor: '#fa0505'
-                            },
-                            {
-                              x: '',
-                              y: 0,
-                              fillColor: '#fa0505'
-                            },
-                    ]
-                    },
-                ]
-                });
-             
-                current.setState({
-                  series1:[{
-                    data:[0]
-                  }],
-                  options1:{
-                    xaxis: {
-                      categories: 'product_name'
-                    },
-                    colors: '#fa0505'
-                  }
-                  });
                   });
       }
 
@@ -413,6 +367,7 @@ export class Dashboard2 extends Component {
                 </div>
         </div>
             <div className="container">
+         
                 <div className="row">
                     <div className="col-md-4">
                         <div className="card">
@@ -464,6 +419,8 @@ export class Dashboard2 extends Component {
                         </div>
                     </div>
                 </div>
+                 
+
             </div>
         </section>
         
